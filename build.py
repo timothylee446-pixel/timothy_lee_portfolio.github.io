@@ -16,8 +16,8 @@ PROJECTS = [
 
 # (slug, company, role, summary, tags, thumbnail)
 EXPERIENCE = [
- ("notch","Notch","Co-op","Replaced brittle radomes, automated a paint process, and built a ventilated fume enclosure.",["Composites","CNC","G-code","Fusion 360"],"notch-radome-1.jpg"),
- ("sharkninja","SharkNinja","Mechanical engineering co-op","A patented airflow component headed for 500,000 units, Tesla-valve nozzle research, and test development.",["DFM","Fluids","Testing","Patent"],"sn-suction-chart.jpg"),
+ ("notch","Notch","Co-op","Replaced brittle radomes, automated a paint process, and built a ventilated fume enclosure.",["Composites","CNC","G-code","Fusion 360"],"notch-logo.jpg"),
+ ("sharkninja","SharkNinja","Mechanical engineering co-op","A patented airflow component headed for 500,000 units, Tesla-valve nozzle research, and test development.",["DFM","Fluids","Testing","Patent"],"sharkninja-logo.jpg"),
 ]
 
 FONTS = "https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap"
@@ -46,6 +46,10 @@ def render_blocks(blocks):
         k=b[0]
         if k=="fig":
             run.append(fig_html(b[1], b[2] if len(b)>2 else "")); continue
+        if k=="loop":
+            cap = b[2] if len(b)>2 else ""
+            capel = f"<figcaption>{esc(cap)}</figcaption>" if cap else ""
+            run.append(f'<figure class="loop"><video autoplay muted loop playsinline preload="metadata" src="videos/{b[1]}" data-name="{b[1]}" aria-label="{esc(cap)}"></video>{capel}</figure>'); continue
         flush()
         if k=="h2": out.append(f'<h2 id="{slugify(b[1])}">{esc(b[1])}</h2>')
         elif k=="h3": out.append(f"<h3>{esc(b[1])}</h3>")
@@ -118,7 +122,7 @@ def xp_cards():
     out=[]
     for i,(slug,co,role,summ,tags,thumb) in enumerate(EXPERIENCE):
         out.append(f"""<a class="xp" href="{slug}.html">
-  <span class="xp-media"><img src="images/{thumb}" alt="" loading="lazy" data-thumb><span class="xp-mono" aria-hidden="true">{esc(co[0])}</span></span>
+  <span class="xp-media{' logo' if '-logo' in thumb else ''}"><img src="images/{thumb}" alt="" loading="lazy" data-thumb><span class="xp-mono" aria-hidden="true">{esc(co[0])}</span></span>
   <span class="xp-body"><span class="card-num">{role}</span><span class="xp-t">{esc(co)}</span><span class="card-d">{esc(summ)}</span>{tags_html(tags)}<span class="more">Read the case study <span aria-hidden="true">→</span></span></span>
 </a>""")
     return '<div class="xps">'+"".join(out)+"</div>"
@@ -374,14 +378,17 @@ project_page("notch","Notch",EXPERIENCE[0][3],notch_meta,notch_blocks,"<span>Exp
 # ---- SharkNinja
 sn_meta=[("Role","Mechanical engineering co-op"),("Focus","Corded vacuums"),("Note","Unreleased product details are under NDA")]
 sn_blocks=[
- ("p","I worked on several projects at SharkNinja. One major project was a new type of vacuum set to release in May 2026. Another was improving vacuum nozzle technology."),
+ ("loop","sn-transformer-transformation.mp4","The Shark PowerDetect Transformer, released in June 2026"),
+ ("p","I worked on several projects at SharkNinja. One major project was a new type of vacuum, the Shark Transformer, which released in June 2026. Another was improving vacuum nozzle technology."),
+ ("loop","sn-transformer-reveal.mp4",""),("loop","sn-transformer-versatility.mp4",""),("loop","sn-transformer-cleaningpower.mp4",""),
+ ("link","https://www.sharkninja.com/shark-powerdetect-transformer-upright-vacuum/LX5000.html","See the Transformer on sharkninja.com"),
  ("p","Along the way I learned to design for manufacture (DFM) for plastic injection molding, navigate a PLM, use basic electrical test equipment, work in a laboratory, run provided tests and create my own, collect highly accurate data, present to leadership, and analyze and debug complex fluid and mechanical systems."),
  ("h2","Improved suction"),
- ("p","The goal was to improve suction while the vacuum is in use. The product is unreleased and the specifics are under NDA."),
+ ("p","The goal was to improve suction while the vacuum is in use."),
  ("p","When our team received the first off-tool build, we saw several problems, and loss of suction force was the root cause. I designed and prototyped a component that changes the behavior of the internal airflow and drastically reduced the loss. I pressure tested it inside the unit and iterated several times."),
  ("fig","sn-suction-chart.jpg","Suction % as debris enters the system. Orange: legacy design. Blue: my design."),
  ("fig","sn-suction-2.jpg",""),
- ("p","Steel molds are being cut to produce the component at mass-production scale, for 500,000 units over the next three years. The patent is still being processed."),
+ ("p","Steel molds have been cut to produce the component at mass-production scale for a projected initial 500,000 units. The patent is still being processed."),
  ("h2","Castellation design for reverse cleaning"),
  ("p","I designed castellations to improve reverse cleaning, a requirement for vacuums in the EU that is likely to reach the US. A current solution is an articulating squeegee that flips up to let debris through on the backstroke. A common problem is that the brushroll shoots debris out the back during that backstroke."),
  ("video","LA490_spitting.mp4","Articulating squeegee (current design): severe debris spitting"),
@@ -417,16 +424,15 @@ page("projects.html","Projects","Mechanical, robotics, and electronics projects 
 # ---- home
 FIGS = [("vtol-hero.jpg","Fig. 01","VTOL airframe"),("hexa-hero.jpg","Fig. 02","Hexacopter frame"),("gripper-hero.jpg","Fig. 03","Soft gripper")]
 figs = "".join(f'<figure class="hf hf{i+1}"><img src="images/{f}" alt="{esc(c)}" data-thumb><figcaption><span>{n}</span>{esc(c)}</figcaption></figure>' for i,(f,n,c) in enumerate(FIGS))
-STATS = [("500k","units planned for my patent-pending SharkNinja airflow component"),
-         ("10 ft","drops survived by the cast radomes I designed at Notch"),
-         ("$1,500","Northeastern PEAK research grant for a soft robotic gripper"),
-         (f"{len(PROJECTS)+len(EXPERIENCE)}","case studies, from FEA-validated wings to an Arduino that hears whistles")]
+STATS = [("500k","projected initial units of my patent-pending SharkNinja airflow component"),
+         ("2","patents pending: one at SharkNinja and one for CAS, a contamination-aware sampling venture"),
+         ("$1,500","Northeastern PEAK research grant for a soft robotic gripper")]
 stats = "".join(f'<div class="stat"><dt>{esc(v)}</dt><dd>{esc(d)}</dd></div>' for v,d in STATS)
 home = f"""<section class="hero"><div class="wrap hero-in">
   <div class="hero-text">
     <p class="kicker"><span>Mechanical engineering</span><span>Northeastern University</span></p>
     <h1>Timothy<br>Lee<span class="dot" aria-hidden="true">.</span></h1>
-    <p class="hero-sub">I design and build drones, soft robotic grippers, and consumer products, from CAD and simulation all the way to the shop floor.</p>
+    <p class="hero-sub">I design and build drones, soft robotic grippers, and consumer products, plus the molds and machines that make them, from CAD and simulation to the shop floor.</p>
     <p class="cta"><a class="btn" href="#work">See my work <span aria-hidden="true">↓</span></a><a class="btn ghost" href="#about">About me</a></p>
   </div>
   <div class="hero-art">{figs}</div>

@@ -28,6 +28,11 @@ document.querySelectorAll('video[data-name]').forEach(function(v){
   v.addEventListener('error',function(){missing(v)});
 });
 
+// Looping product clips stay still for visitors who prefer reduced motion.
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('.loop video').forEach(function(v){ v.removeAttribute('autoplay'); v.pause(); v.controls=true; });
+}
+
 // Card and hero thumbnails fall back to the patterned panel behind them.
 document.querySelectorAll('img[data-thumb]').forEach(function(img){
   function gone(){ img.remove(); }
