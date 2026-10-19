@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SharkNinja co-op | Timothy Lee</title>
+<meta name="description" content="Corded vacuum design and testing: a patented airflow component, nozzle research, and test development.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">Timothy Lee</a>
+  <nav aria-label="Main"><a href="index.html" aria-current="page">Home</a><a href="sharkninja.html">SharkNinja co-op</a><a href="projects.html">Projects</a></nav>
+</header>
+<main>
+<article class="project">
+<a class="back" href="index.html">Home</a>
+<h1>SharkNinja co-op</h1>
+<p class="lede">Corded vacuum design and testing: a patented airflow component, nozzle research, and test development.</p>
+<dl class="meta"><div><dt>Role</dt><dd>Mechanical engineering co-op</dd></div><div><dt>Focus</dt><dd>Corded vacuums</dd></div><div><dt>Note</dt><dd>Unreleased product details are under NDA</dd></div></dl>
+<p>I worked on several projects at SharkNinja. One major project was a new type of vacuum set to release in May 2026. Another was improving vacuum nozzle technology.</p>
+<p>Along the way I learned to design for manufacture (DFM) for plastic injection molding, navigate a PLM, use basic electrical test equipment, work in a laboratory, run provided tests and create my own, collect highly accurate data, present to leadership, and analyze and debug complex fluid and mechanical systems.</p>
+<h2>Improved suction</h2>
+<p>The goal was to improve suction while the vacuum is in use. The product is unreleased and the specifics are under NDA.</p>
+<p>When our team received the first off-tool build, we saw several problems, and loss of suction force was the root cause. I designed and prototyped a component that changes the behavior of the internal airflow and drastically reduced the loss. I pressure tested it inside the unit and iterated several times.</p>
+<figure><img src="images/sn-suction-chart.jpg" alt="Suction % as debris enters the system. Orange: legacy design. Blue: my design." loading="lazy" data-name="sn-suction-chart.jpg"><figcaption>Suction % as debris enters the system. Orange: legacy design. Blue: my design.</figcaption></figure>
+<figure><img src="images/sn-suction-2.jpg" alt="" loading="lazy" data-name="sn-suction-2.jpg"></figure>
+<p>Steel molds are being cut to produce the component at mass-production scale, for 500,000 units over the next three years. The patent is still being processed.</p>
+<h2>Castellation design for reverse cleaning</h2>
+<p>I designed castellations to improve reverse cleaning, a requirement for vacuums in the EU that is likely to reach the US. A current solution is an articulating squeegee that flips up to let debris through on the backstroke. A common problem is that the brushroll shoots debris out the back during that backstroke.</p>
+<figure><video controls preload="metadata" src="videos/LA490_spitting.mp4" data-name="LA490_spitting.mp4"></video><figcaption>Articulating squeegee (current design): severe debris spitting</figcaption></figure>
+<figure><video controls preload="metadata" src="videos/coil_14.1_spitting.mp4" data-name="coil_14.1_spitting.mp4"></video><figcaption>Coiled castellations (my design): debris spitting highly mitigated</figcaption></figure>
+<p>The castellations are based on Tesla valves, which let flow pass much more easily in one direction than the other. In the video, the castellations create vortexes that keep debris from shooting out the back of the nozzle.</p>
+<figure><img src="images/sn-castellation-1.jpg" alt="" loading="lazy" data-name="sn-castellation-1.jpg"></figure>
+<figure><video controls preload="metadata" src="videos/LA490_hf.mp4" data-name="LA490_hf.mp4"></video><figcaption>Hard floor, current design: some debris spitting</figcaption></figure>
+<figure><video controls preload="metadata" src="videos/coil_14.1_hf.mp4" data-name="coil_14.1_hf.mp4"></video><figcaption>Hard floor, my design: much less debris spitting</figcaption></figure>
+<p>Hard floor results looked extremely promising. Last, I tested cleanability with sand spread over thick carpet (my own tests, not equivalent to third-party testing standards). Cleanability scores dropped too much. I concluded the castellations made the nozzle ride up on the carpet and lose suction, so I dropped the project.</p>
+<figure><img src="images/sn-carpet-1.jpg" alt="" loading="lazy" data-name="sn-carpet-1.jpg"></figure>
+<figure><img src="images/sn-carpet-2.jpg" alt="" loading="lazy" data-name="sn-carpet-2.jpg"></figure>
+<figure><video controls preload="metadata" src="videos/carpet_test_recording.mp4" data-name="carpet_test_recording.mp4"></video></figure>
+<h2>Valve door design</h2>
+<p>I designed valve doors for a vacuum. Criteria:</p>
+<ul><li>Don&#x27;t stick out</li><li>Robust</li><li>No sliding contact that could wear down the seal</li></ul>
+<h2>Pressure and current testing</h2>
+<p>One cleaning cycle needed a high pressure delta to work, but the motor ramp-up tripped home circuit breakers. I tested different cycle programs that lowered peak current while keeping a high pressure delta.</p>
+<figure><img src="images/sn-pressure-1.jpg" alt="The newer program shows a much lower pressure delta." loading="lazy" data-name="sn-pressure-1.jpg"><figcaption>The newer program shows a much lower pressure delta.</figcaption></figure>
+<p>Using an oscilloscope and a pressure sensor, I compared the old working program (orange, top) with the new failing one (blue, bottom).</p>
+<figure><img src="images/sn-pressure-2.jpg" alt="" loading="lazy" data-name="sn-pressure-2.jpg"></figure>
+<figure><img src="images/sn-pressure-3.jpg" alt="" loading="lazy" data-name="sn-pressure-3.jpg"></figure>
+</article>
+</main>
+<footer>
+  <p>Timothy Lee, mechanical engineering at Northeastern University. Boston, MA.</p>
+</footer>
+<script src="site.js"></script>
+</body>
+</html>

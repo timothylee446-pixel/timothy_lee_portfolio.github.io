@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Whistle Controlled Decorations | Timothy Lee</title>
+<meta name="description" content="Turn off my lights from bed by whistling, with no remote and no controller.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">Timothy Lee</a>
+  <nav aria-label="Main"><a href="index.html">Home</a><a href="sharkninja.html">SharkNinja co-op</a><a href="projects.html" aria-current="page">Projects</a></nav>
+</header>
+<main>
+<article class="project">
+<a class="back" href="projects.html">All projects</a>
+<h1>Whistle Controlled Decorations</h1>
+<p class="lede">Turn off my lights from bed by whistling, with no remote and no controller.</p>
+<dl class="meta"><div><dt>Skills</dt><dd>Wiring circuits, reading and transmitting IR signals, Arduino libraries</dd></div><div><dt>Status</dt><dd>Working prototype</dd></div></dl>
+<figure><img src="images/whistle-hero.jpg" alt="" loading="lazy" data-name="whistle-hero.jpg"></figure>
+<h2>Objective</h2>
+<p>My lamps are not near my bed, so I have to get up to turn them off before sleeping. I wanted to switch them off without getting up and without a remote or other controller. I&#x27;m good at whistling, so the idea was to control the lights by whistling.</p>
+<h2>Components</h2>
+<figure><img src="images/whistle-mic.jpg" alt="Microphone" loading="lazy" data-name="whistle-mic.jpg"><figcaption>Microphone</figcaption></figure>
+<figure><img src="images/whistle-irrx.jpg" alt="IR receiver" loading="lazy" data-name="whistle-irrx.jpg"><figcaption>IR receiver</figcaption></figure>
+<figure><img src="images/whistle-irled.jpg" alt="IR LED" loading="lazy" data-name="whistle-irled.jpg"><figcaption>IR LED</figcaption></figure>
+<figure><img src="images/whistle-strip.jpg" alt="LED strip" loading="lazy" data-name="whistle-strip.jpg"><figcaption>LED strip</figcaption></figure>
+<p>I pointed the light strip&#x27;s remote at the receiver circuit and recorded the hex values for power and several colors. Then I built the transmitter circuit, with match frequencies spaced 300 Hz apart, to send those commands.</p>
+<figure><img src="images/whistle-circuit.jpg" alt="" loading="lazy" data-name="whistle-circuit.jpg"></figure>
+<figure><video controls preload="metadata" src="videos/light_test_1.mp4" data-name="light_test_1.mp4"></video><figcaption>First test</figcaption></figure>
+<h2>Next steps</h2>
+<ol><li>Add a capacitor to smooth the input signal and avoid accidental triggering.</li><li>Adjust the code so inputs are more distinct, which allows more commands.</li></ol>
+</article>
+</main>
+<footer>
+  <p>Timothy Lee, mechanical engineering at Northeastern University. Boston, MA.</p>
+</footer>
+<script src="site.js"></script>
+</body>
+</html>
