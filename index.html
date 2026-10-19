@@ -5,39 +5,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Portfolio | Timothy Lee</title>
 <meta name="description" content="Timothy Lee, mechanical engineering student at Northeastern University. Drones, soft robotics, and consumer product design.">
+<meta name="theme-color" content="#F3F1EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1013" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF5A1F'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='30' font-weight='800' text-anchor='middle' fill='%23111417'%3ETL%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
-<header class="top">
-  <a class="brand" href="index.html">Timothy Lee</a>
-  <nav aria-label="Main"><a href="index.html" aria-current="page">Home</a><a href="sharkninja.html">SharkNinja co-op</a><a href="projects.html">Projects</a></nav>
-</header>
-<main>
-<section class="hero">
-  <h1>Timothy Lee</h1>
-  <p class="hero-sub">Mechanical engineering student at Northeastern University, building drones, grippers, and consumer products.</p>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="top-in">
+  <a class="brand" href="index.html"><span class="mark" aria-hidden="true">TL</span><span class="brand-name">Timothy Lee</span></a>
+  <nav aria-label="Main"><a href="index.html#work">Work</a><a href="projects.html">Projects</a><a href="index.html#about">About</a></nav>
+</div></header>
+<main id="main">
+<section class="hero"><div class="wrap hero-in">
+  <div class="hero-text">
+    <p class="kicker"><span>Mechanical engineering</span><span>Northeastern University</span></p>
+    <h1>Timothy<br>Lee<span class="dot" aria-hidden="true">.</span></h1>
+    <p class="hero-sub">I design and build drones, soft robotic grippers, and consumer products, from CAD and simulation all the way to the shop floor.</p>
+    <p class="cta"><a class="btn" href="#work">See my work <span aria-hidden="true">↓</span></a><a class="btn ghost" href="#about">About me</a></p>
+  </div>
+  <div class="hero-art"><figure class="hf hf1"><img src="images/vtol-hero.jpg" alt="VTOL airframe" data-thumb><figcaption><span>Fig. 01</span>VTOL airframe</figcaption></figure><figure class="hf hf2"><img src="images/hexa-hero.jpg" alt="Hexacopter frame" data-thumb><figcaption><span>Fig. 02</span>Hexacopter frame</figcaption></figure><figure class="hf hf3"><img src="images/gripper-hero.jpg" alt="Soft gripper" data-thumb><figcaption><span>Fig. 03</span>Soft gripper</figcaption></figure></div>
+</div></section>
+<section class="stats-band"><dl class="wrap stats"><div class="stat"><dt>500k</dt><dd>units planned for my patent-pending SharkNinja airflow component</dd></div><div class="stat"><dt>10 ft</dt><dd>drops survived by the cast radomes I designed at Notch</dd></div><div class="stat"><dt>$1,500</dt><dd>Northeastern PEAK research grant for a soft robotic gripper</dd></div><div class="stat"><dt>9</dt><dd>case studies, from FEA-validated wings to an Arduino that hears whistles</dd></div></dl></section>
+<section class="section wrap" id="work">
+  <div class="sec-head"><p class="kicker"><span>01</span><span>Experience</span></p><h2>Work</h2></div>
+  <div class="xps"><a class="xp" href="notch.html">
+  <span class="xp-media"><img src="images/notch-radome-1.jpg" alt="" loading="lazy" data-thumb><span class="xp-mono" aria-hidden="true">N</span></span>
+  <span class="xp-body"><span class="card-num">Co-op</span><span class="xp-t">Notch</span><span class="card-d">Replaced brittle radomes, automated a paint process, and built a ventilated fume enclosure.</span><span class="tags"><span>Composites</span><span>CNC</span><span>G-code</span><span>Fusion 360</span></span><span class="more">Read the case study <span aria-hidden="true">→</span></span></span>
+</a><a class="xp" href="sharkninja.html">
+  <span class="xp-media"><img src="images/sn-suction-chart.jpg" alt="" loading="lazy" data-thumb><span class="xp-mono" aria-hidden="true">S</span></span>
+  <span class="xp-body"><span class="card-num">Mechanical engineering co-op</span><span class="xp-t">SharkNinja</span><span class="card-d">A patented airflow component headed for 500,000 units, Tesla-valve nozzle research, and test development.</span><span class="tags"><span>DFM</span><span>Fluids</span><span>Testing</span><span>Patent</span></span><span class="more">Read the case study <span aria-hidden="true">→</span></span></span>
+</a></div>
 </section>
-<section class="about">
-  <p>I'm a third-year mechanical engineering major at Northeastern University, from Boston, Massachusetts. I love throwing myself into new things, which has led me to hiking, camping, travel, competitive spikeball, table tennis, and other sports. At school I'm an active member of AerospaceNU and Rev, an entrepreneurship club.</p>
-  <p>My first co-op was at SharkNinja, working on corded vacuums. My proudest achievement there was inventing a patented component that greatly improved the performance of a headlining Shark product.</p>
-  <p>Next I want to learn as much as I can in industry, then take those skills out on my own and start a tech company.</p>
+<section class="section wrap" id="projects">
+  <div class="sec-head"><p class="kicker"><span>02</span><span>Selected projects</span></p><h2>Projects</h2><a class="sec-link" href="projects.html">Project index <span aria-hidden="true">→</span></a></div>
+  <div class="cards"><a class="card" href="vtol.html">
+  <span class="card-media"><img src="images/vtol-hero.jpg" alt="" loading="lazy" data-thumb></span>
+  <span class="card-body"><span class="card-num">01</span><span class="card-t">VTOL</span><span class="card-d">Quadcopter VTOL UAV with an FEA-validated wing structure.</span><span class="tags"><span>Aircraft</span><span>FEA</span><span>SolidWorks</span></span></span>
+</a><a class="card" href="hexacopter.html">
+  <span class="card-media"><img src="images/hexa-hero.jpg" alt="" loading="lazy" data-thumb></span>
+  <span class="card-body"><span class="card-num">02</span><span class="card-t">Hexacopter</span><span class="card-d">Drone frame for a 20 lb payload, plus a modular tool-changing system.</span><span class="tags"><span>Drones</span><span>Mechanisms</span><span>Vibration</span></span></span>
+</a><a class="card" href="pneumatic-gripper.html">
+  <span class="card-media"><img src="images/gripper-hero.jpg" alt="" loading="lazy" data-thumb></span>
+  <span class="card-body"><span class="card-num">03</span><span class="card-t">Pneumatic Gripper</span><span class="card-d">Soft robotic gripper for a drone, funded by a $1,500 PEAK grant.</span><span class="tags"><span>Soft robotics</span><span>Molding</span><span>Research</span></span></span>
+</a><a class="card" href="assistive-powder-board.html">
+  <span class="card-media"><img src="images/powder-hero.jpg" alt="" loading="lazy" data-thumb></span>
+  <span class="card-body"><span class="card-num">04</span><span class="card-t">Assistive Powder Board</span><span class="card-d">Low-cost powder board that motivates children in wheelchairs to do physical therapy.</span><span class="tags"><span>Client work</span><span>Woodworking</span><span>Sensors</span></span></span>
+</a><a class="card" href="whistle-controlled-decorations.html">
+  <span class="card-media"><img src="images/whistle-hero.jpg" alt="" loading="lazy" data-thumb></span>
+  <span class="card-body"><span class="card-num">05</span><span class="card-t">Whistle Controlled Decorations</span><span class="card-d">Arduino circuit that switches a light strip when I whistle.</span><span class="tags"><span>Arduino</span><span>IR</span><span>Circuits</span></span></span>
+</a><a class="card" href="gravity-gambit-game.html">
+  <span class="card-media"><img src="images/gambit-hero.jpg" alt="" loading="lazy" data-thumb></span>
+  <span class="card-body"><span class="card-num">06</span><span class="card-t">Gravity Gambit</span><span class="card-d">Two-player plinko and target game with automatic scoring.</span><span class="tags"><span>Laser cutting</span><span>AutoCAD</span><span>Teamwork</span></span></span>
+</a><a class="card" href="chess-set.html">
+  <span class="card-media"><img src="images/chess-hero-1.jpg" alt="" loading="lazy" data-thumb></span>
+  <span class="card-body"><span class="card-num">07</span><span class="card-t">Chess Set</span><span class="card-d">SolidWorks chess set themed on famous buildings.</span><span class="tags"><span>SolidWorks</span><span>Surfacing</span></span></span>
+</a></div>
 </section>
-<section class="featured">
-  <h2>Experience</h2>
-  <ul class="rows">
-    <li><a href="notch.html"><span class="t">Notch</span><span class="d">Replaced brittle radomes, automated a paint process, and built a ventilated fume enclosure.</span></a></li>
-    <li><a href="sharkninja.html"><span class="t">SharkNinja co-op</span><span class="d">A patented airflow component headed for 500,000 units, Tesla-valve nozzle research, and test development.</span></a></li>
-  </ul>
-  <h2>Projects</h2>
-  <ul class="rows"><li><a href="vtol.html"><span class="t">VTOL</span><span class="d">Quadcopter VTOL UAV with an FEA-validated wing structure.</span></a></li><li><a href="hexacopter.html"><span class="t">Hexacopter</span><span class="d">Drone frame for a 20 lb payload, plus a modular tool-changing system.</span></a></li><li><a href="pneumatic-gripper.html"><span class="t">Pneumatic Gripper</span><span class="d">Soft robotic gripper for a drone, funded by a $1,500 PEAK grant.</span></a></li><li><a href="assistive-powder-board.html"><span class="t">Assistive Powder Board</span><span class="d">Low-cost powder board that motivates children in wheelchairs to do physical therapy.</span></a></li><li><a href="whistle-controlled-decorations.html"><span class="t">Whistle Controlled Decorations</span><span class="d">Arduino circuit that switches a light strip when I whistle.</span></a></li><li><a href="gravity-gambit-game.html"><span class="t">Gravity Gambit</span><span class="d">Two-player plinko and target game with automatic scoring.</span></a></li><li><a href="chess-set.html"><span class="t">Chess Set</span><span class="d">SolidWorks chess set themed on famous buildings.</span></a></li></ul>
+<section class="section wrap about" id="about">
+  <div class="sec-head"><p class="kicker"><span>03</span><span>About</span></p><h2>Hi, I'm Timothy.</h2></div>
+  <div class="about-body">
+    <p class="about-lead">I'm a third-year mechanical engineering major at Northeastern University, from Boston, Massachusetts.</p>
+    <p>I love throwing myself into new things, which has led me to hiking, camping, travel, competitive spikeball, table tennis, and other sports. At school I'm an active member of AerospaceNU and Rev, an entrepreneurship club.</p>
+    <p>My first co-op was at SharkNinja, working on corded vacuums. My proudest achievement there was inventing a patented component that greatly improved the performance of a headlining Shark product.</p>
+    <p>Next I want to learn as much as I can in industry, then take those skills out on my own and start a tech company.</p>
+    <dl class="facts">
+      <div><dt>Clubs</dt><dd><span class="tags"><span>AerospaceNU</span><span>Rev</span></span></dd></div>
+      <div><dt>Toolbox</dt><dd><span class="tags"><span>SolidWorks</span><span>Fusion 360</span><span>FEA</span><span>AutoCAD</span><span>3D printing</span><span>CNC</span><span>Laser cutting</span><span>Arduino</span><span>Python</span></span></dd></div>
+      <div><dt>Off the clock</dt><dd><span class="tags"><span>Hiking</span><span>Camping</span><span>Travel</span><span>Spikeball</span><span>Table tennis</span></span></dd></div>
+    </dl>
+  </div>
 </section>
 </main>
-<footer>
-  <p>Timothy Lee, mechanical engineering at Northeastern University. Boston, MA.</p>
-</footer>
+<footer class="foot"><div class="wrap foot-in">
+  <p class="foot-big">Designed, built,<br>tested, iterated.</p>
+  <div class="foot-meta">
+    <p><strong>Timothy Lee</strong><br>Mechanical engineering, Northeastern University<br>Boston, MA</p>
+    <a class="totop" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+  </div>
+</div></footer>
 <script src="site.js"></script>
 </body>
 </html>

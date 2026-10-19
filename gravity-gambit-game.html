@@ -5,33 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gravity Gambit | Timothy Lee</title>
 <meta name="description" content="Design a two-player, 1v1 game. My small team designed three iterations.">
+<meta name="theme-color" content="#F3F1EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1013" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF5A1F'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='30' font-weight='800' text-anchor='middle' fill='%23111417'%3ETL%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
-<header class="top">
-  <a class="brand" href="index.html">Timothy Lee</a>
-  <nav aria-label="Main"><a href="index.html">Home</a><a href="sharkninja.html">SharkNinja co-op</a><a href="projects.html" aria-current="page">Projects</a></nav>
-</header>
-<main>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="top-in">
+  <a class="brand" href="index.html"><span class="mark" aria-hidden="true">TL</span><span class="brand-name">Timothy Lee</span></a>
+  <nav aria-label="Main"><a href="index.html#work">Work</a><a href="projects.html" aria-current="page">Projects</a><a href="index.html#about">About</a></nav>
+</div></header>
+<main id="main">
 <article class="project">
-<a class="back" href="projects.html">All projects</a>
+<header class="proj-head"><div class="wrap">
+<a class="back" href="projects.html"><span aria-hidden="true">←</span> All projects</a>
+<p class="kicker"><span>Project 06</span><span>/ 07</span></p>
 <h1>Gravity Gambit</h1>
 <p class="lede">Design a two-player, 1v1 game. My small team designed three iterations.</p>
 <dl class="meta"><div><dt>My contribution</dt><dd>All CAD, laser cutting, the point trigger and collection system, and most of the large physical assembly</dd></div><div><dt>Skills</dt><dd>AutoCAD, laser cutting, teamwork</dd></div></dl>
-<figure><img src="images/gambit-hero.jpg" alt="The board detects balls thrown into the holes, counts the points automatically, and shows them on an LCD screen inset into the board." loading="lazy" data-name="gambit-hero.jpg"><figcaption>The board detects balls thrown into the holes, counts the points automatically, and shows them on an LCD screen inset into the board.</figcaption></figure>
+</div></header>
+<div class="wrap"><figure class="cover"><img src="images/gambit-hero.jpg" alt="The board detects balls thrown into the holes, counts the points automatically, and shows them on an LCD screen inset into the board." data-name="gambit-hero.jpg"><figcaption>The board detects balls thrown into the holes, counts the points automatically, and shows them on an LCD screen inset into the board.</figcaption></figure></div>
+<div class="proj-body wrap">
+
+<div class="prose">
 <p>I drew the CAD files for both the plinko board and the target board, laser cut the parts, designed the point trigger and collection system, and assembled most of the large parts.</p>
-<figure><img src="images/gambit-2.jpg" alt="" loading="lazy" data-name="gambit-2.jpg"></figure>
-<figure><img src="images/gambit-3.jpg" alt="" loading="lazy" data-name="gambit-3.jpg"></figure>
-<figure><img src="images/gambit-4.jpg" alt="" loading="lazy" data-name="gambit-4.jpg"></figure>
-<figure><img src="images/gambit-5.jpg" alt="" loading="lazy" data-name="gambit-5.jpg"></figure>
+<div class="gallery g3"><figure><img src="images/gambit-2.jpg" alt="" loading="lazy" data-name="gambit-2.jpg"></figure><figure><img src="images/gambit-3.jpg" alt="" loading="lazy" data-name="gambit-3.jpg"></figure><figure><img src="images/gambit-4.jpg" alt="" loading="lazy" data-name="gambit-4.jpg"></figure><figure><img src="images/gambit-5.jpg" alt="" loading="lazy" data-name="gambit-5.jpg"></figure></div>
+</div>
+</div>
+<nav class="pager wrap" aria-label="More work"><a class="prev" href="whistle-controlled-decorations.html"><span>Previous</span><strong>Whistle Controlled Decorations</strong></a><a class="next" href="chess-set.html"><span>Next</span><strong>Chess Set</strong></a></nav>
 </article>
 </main>
-<footer>
-  <p>Timothy Lee, mechanical engineering at Northeastern University. Boston, MA.</p>
-</footer>
+<footer class="foot"><div class="wrap foot-in">
+  <p class="foot-big">Designed, built,<br>tested, iterated.</p>
+  <div class="foot-meta">
+    <p><strong>Timothy Lee</strong><br>Mechanical engineering, Northeastern University<br>Boston, MA</p>
+    <a class="totop" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+  </div>
+</div></footer>
 <script src="site.js"></script>
 </body>
 </html>

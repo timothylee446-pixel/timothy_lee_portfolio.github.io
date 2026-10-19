@@ -5,68 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hexacopter | Timothy Lee</title>
 <meta name="description" content="Create a hexacopter drone frame that can support a 20 lb dynamic payload, optimized for weight, stiffness, and strength.">
+<meta name="theme-color" content="#F3F1EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1013" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF5A1F'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='30' font-weight='800' text-anchor='middle' fill='%23111417'%3ETL%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
-<header class="top">
-  <a class="brand" href="index.html">Timothy Lee</a>
-  <nav aria-label="Main"><a href="index.html">Home</a><a href="sharkninja.html">SharkNinja co-op</a><a href="projects.html" aria-current="page">Projects</a></nav>
-</header>
-<main>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="top-in">
+  <a class="brand" href="index.html"><span class="mark" aria-hidden="true">TL</span><span class="brand-name">Timothy Lee</span></a>
+  <nav aria-label="Main"><a href="index.html#work">Work</a><a href="projects.html" aria-current="page">Projects</a><a href="index.html#about">About</a></nav>
+</div></header>
+<main id="main">
 <article class="project">
-<a class="back" href="projects.html">All projects</a>
+<header class="proj-head"><div class="wrap">
+<a class="back" href="projects.html"><span aria-hidden="true">←</span> All projects</a>
+<p class="kicker"><span>Project 02</span><span>/ 07</span></p>
 <h1>Hexacopter</h1>
 <p class="lede">Create a hexacopter drone frame that can support a 20 lb dynamic payload, optimized for weight, stiffness, and strength.</p>
 <dl class="meta"><div><dt>My contribution</dt><dd>All CAD shown is mine unless noted</dd></div><div><dt>Current mass</dt><dd>670 g, without the modular tool-changing system</dd></div><div><dt>Materials</dt><dd>PLA, nylon, steel, carbon fiber</dd></div></dl>
-<figure><img src="images/hexa-hero.jpg" alt="Reference scale: 5 cm side length" loading="lazy" data-name="hexa-hero.jpg"><figcaption>Reference scale: 5 cm side length</figcaption></figure>
+</div></header>
+<div class="wrap"><figure class="cover"><img src="images/hexa-hero.jpg" alt="Reference scale: 5 cm side length" data-name="hexa-hero.jpg"><figcaption>Reference scale: 5 cm side length</figcaption></figure></div>
+<div class="proj-body wrap has-toc">
+<aside class="toc" aria-label="On this page"><p class="toc-h">On this page</p><ol><li><a href="#version-1-0">Version 1.0</a></li><li><a href="#version-1-1">Version 1.1</a></li><li><a href="#version-1-2">Version 1.2</a></li><li><a href="#version-1-3">Version 1.3</a></li><li><a href="#modular-tool-changing-system">Modular tool-changing system</a></li><li><a href="#fourth-iteration-my-design">Fourth iteration (my design)</a></li><li><a href="#vibration-study-motor-mount">Vibration study: motor mount</a></li></ol></aside>
+<div class="prose">
 <p>Skills used: CAD, 3D printing, iterative design, part sourcing, BOM management, leadership, interdisciplinary teamwork, and project management.</p>
-<h2>Version 1.0</h2>
-<figure><img src="images/hexa-v10-1.jpg" alt="" loading="lazy" data-name="hexa-v10-1.jpg"></figure>
-<figure><img src="images/hexa-v10-2.jpg" alt="" loading="lazy" data-name="hexa-v10-2.jpg"></figure>
-<h2>Version 1.1</h2>
-<figure><img src="images/hexa-v11-1.jpg" alt="" loading="lazy" data-name="hexa-v11-1.jpg"></figure>
-<figure><img src="images/hexa-v11-2.jpg" alt="" loading="lazy" data-name="hexa-v11-2.jpg"></figure>
-<figure><img src="images/hexa-v11-3.jpg" alt="" loading="lazy" data-name="hexa-v11-3.jpg"></figure>
-<figure><img src="images/hexa-v11-4.jpg" alt="" loading="lazy" data-name="hexa-v11-4.jpg"></figure>
-<figure><img src="images/hexa-v11-5.jpg" alt="" loading="lazy" data-name="hexa-v11-5.jpg"></figure>
+<h2 id="version-1-0">Version 1.0</h2>
+<div class="gallery g2"><figure><img src="images/hexa-v10-1.jpg" alt="" loading="lazy" data-name="hexa-v10-1.jpg"></figure><figure><img src="images/hexa-v10-2.jpg" alt="" loading="lazy" data-name="hexa-v10-2.jpg"></figure></div>
+<h2 id="version-1-1">Version 1.1</h2>
+<div class="gallery g3"><figure><img src="images/hexa-v11-1.jpg" alt="" loading="lazy" data-name="hexa-v11-1.jpg"></figure><figure><img src="images/hexa-v11-2.jpg" alt="" loading="lazy" data-name="hexa-v11-2.jpg"></figure><figure><img src="images/hexa-v11-3.jpg" alt="" loading="lazy" data-name="hexa-v11-3.jpg"></figure><figure><img src="images/hexa-v11-4.jpg" alt="" loading="lazy" data-name="hexa-v11-4.jpg"></figure><figure><img src="images/hexa-v11-5.jpg" alt="" loading="lazy" data-name="hexa-v11-5.jpg"></figure></div>
 <h3>Rotating arm</h3>
 <p>Rotating the arms to change their angle can help stability and maneuverability. I made several iterations of a gear that holds set positions. The gears lock together on both sides of the bracket and are held in place by a bolt.</p>
-<figure><img src="images/hexa-gear-v1.jpg" alt="Version 1" loading="lazy" data-name="hexa-gear-v1.jpg"><figcaption>Version 1</figcaption></figure>
-<figure><img src="images/hexa-gear-v2.jpg" alt="Version 2" loading="lazy" data-name="hexa-gear-v2.jpg"><figcaption>Version 2</figcaption></figure>
-<figure><img src="images/hexa-gear-v3.jpg" alt="Version 3" loading="lazy" data-name="hexa-gear-v3.jpg"><figcaption>Version 3</figcaption></figure>
-<h2>Version 1.2</h2>
+<div class="gallery g3"><figure><img src="images/hexa-gear-v1.jpg" alt="Version 1" loading="lazy" data-name="hexa-gear-v1.jpg"><figcaption>Version 1</figcaption></figure><figure><img src="images/hexa-gear-v2.jpg" alt="Version 2" loading="lazy" data-name="hexa-gear-v2.jpg"><figcaption>Version 2</figcaption></figure><figure><img src="images/hexa-gear-v3.jpg" alt="Version 3" loading="lazy" data-name="hexa-gear-v3.jpg"><figcaption>Version 3</figcaption></figure></div>
+<h2 id="version-1-2">Version 1.2</h2>
 <p>An assembly containing real parts: airframe, battery, Pixhawk, and Raspberry Pi.</p>
 <figure><img src="images/hexa-v12.jpg" alt="" loading="lazy" data-name="hexa-v12.jpg"></figure>
-<h2>Version 1.3</h2>
+<h2 id="version-1-3">Version 1.3</h2>
 <p>This model is filled with hardware and includes a custom bracket that holds the airframes together, optimized with SolidWorks simulation.</p>
-<figure><img src="images/hexa-v13-1.jpg" alt="" loading="lazy" data-name="hexa-v13-1.jpg"></figure>
-<figure><img src="images/hexa-v13-2.jpg" alt="" loading="lazy" data-name="hexa-v13-2.jpg"></figure>
+<div class="gallery g2"><figure><img src="images/hexa-v13-1.jpg" alt="" loading="lazy" data-name="hexa-v13-1.jpg"></figure><figure><img src="images/hexa-v13-2.jpg" alt="" loading="lazy" data-name="hexa-v13-2.jpg"></figure></div>
 <h3>Assembly</h3>
 <p>I cut the carbon fiber tubes with PPE and a steel Dremel wheel.</p>
-<figure><img src="images/hexa-assembly-1.jpg" alt="" loading="lazy" data-name="hexa-assembly-1.jpg"></figure>
-<figure><img src="images/hexa-assembly-2.jpg" alt="" loading="lazy" data-name="hexa-assembly-2.jpg"></figure>
-<h2>Modular tool-changing system</h2>
+<div class="gallery g2"><figure><img src="images/hexa-assembly-1.jpg" alt="" loading="lazy" data-name="hexa-assembly-1.jpg"></figure><figure><img src="images/hexa-assembly-2.jpg" alt="" loading="lazy" data-name="hexa-assembly-2.jpg"></figure></div>
+<h2 id="modular-tool-changing-system">Modular tool-changing system</h2>
 <p>I did not design this version of the system, but I made the mounts for the motors and the PCB.</p>
-<figure><img src="images/hexa-motor-mount.jpg" alt="Motor mount" loading="lazy" data-name="hexa-motor-mount.jpg"><figcaption>Motor mount</figcaption></figure>
-<figure><img src="images/hexa-pcb-mount.jpg" alt="PCB mount" loading="lazy" data-name="hexa-pcb-mount.jpg"><figcaption>PCB mount</figcaption></figure>
+<div class="gallery g2"><figure><img src="images/hexa-motor-mount.jpg" alt="Motor mount" loading="lazy" data-name="hexa-motor-mount.jpg"><figcaption>Motor mount</figcaption></figure><figure><img src="images/hexa-pcb-mount.jpg" alt="PCB mount" loading="lazy" data-name="hexa-pcb-mount.jpg"><figcaption>PCB mount</figcaption></figure></div>
 <h3>Toolchanger v3 (not my design)</h3>
 <p>Design requirements:</p>
 <ol><li>Push balls to lock the tool and drone couplers together.</li><li>Connect a barrel jack for data transfer.</li></ol>
-<figure><img src="images/hexa-tc3-unlocked.jpg" alt="Unlocked position" loading="lazy" data-name="hexa-tc3-unlocked.jpg"><figcaption>Unlocked position</figcaption></figure>
-<figure><img src="images/hexa-tc3-locked.jpg" alt="Locked position" loading="lazy" data-name="hexa-tc3-locked.jpg"><figcaption>Locked position</figcaption></figure>
+<div class="gallery g2"><figure><img src="images/hexa-tc3-unlocked.jpg" alt="Unlocked position" loading="lazy" data-name="hexa-tc3-unlocked.jpg"><figcaption>Unlocked position</figcaption></figure><figure><img src="images/hexa-tc3-locked.jpg" alt="Locked position" loading="lazy" data-name="hexa-tc3-locked.jpg"><figcaption>Locked position</figcaption></figure></div>
 <p>This system has several problems:</p>
 <ul><li>Unnecessarily high complexity</li><li>Very difficult to assemble</li><li>Heavy</li><li>Little tolerance for error when aligning the couplers</li><li>Needs three pins for a higher data rate</li><li>Susceptible to impacts and vibration</li></ul>
-<figure><video controls preload="metadata" src="videos/mtc_lock_test.mp4" data-name="mtc_lock_test.mp4"></video><figcaption>Locking: balls push out into the outer coupler (outer coupler removed for viewing)</figcaption></figure>
-<figure><video controls preload="metadata" src="videos/mtc_retract_test.mp4" data-name="mtc_retract_test.mp4"></video><figcaption>Unlocking: balls retract and release the outer coupler (outer coupler removed for viewing)</figcaption></figure>
-<h2>Fourth iteration (my design)</h2>
+<figure class="media"><video controls preload="metadata" src="videos/mtc_lock_test.mp4" data-name="mtc_lock_test.mp4"></video><figcaption>Locking: balls push out into the outer coupler (outer coupler removed for viewing)</figcaption></figure>
+<figure class="media"><video controls preload="metadata" src="videos/mtc_retract_test.mp4" data-name="mtc_retract_test.mp4"></video><figcaption>Unlocking: balls retract and release the outer coupler (outer coupler removed for viewing)</figcaption></figure>
+<h2 id="fourth-iteration-my-design">Fourth iteration (my design)</h2>
 <p>Objective: redesign the system to fix the weaknesses of the prior version.</p>
-<figure><img src="images/hexa-tc4-1.jpg" alt="Fewer parts, reduced complexity" loading="lazy" data-name="hexa-tc4-1.jpg"><figcaption>Fewer parts, reduced complexity</figcaption></figure>
-<figure><img src="images/hexa-tc4-2.jpg" alt="Coupler geometry leaves more room for alignment error" loading="lazy" data-name="hexa-tc4-2.jpg"><figcaption>Coupler geometry leaves more room for alignment error</figcaption></figure>
-<figure><img src="images/hexa-tc4-3.jpg" alt="The cam platform is shaped to work with two motor assemblies instead of three" loading="lazy" data-name="hexa-tc4-3.jpg"><figcaption>The cam platform is shaped to work with two motor assemblies instead of three</figcaption></figure>
-<figure><img src="images/hexa-tc4-4.jpg" alt="Three barrel jacks for data" loading="lazy" data-name="hexa-tc4-4.jpg"><figcaption>Three barrel jacks for data</figcaption></figure>
+<div class="gallery g3"><figure><img src="images/hexa-tc4-1.jpg" alt="Fewer parts, reduced complexity" loading="lazy" data-name="hexa-tc4-1.jpg"><figcaption>Fewer parts, reduced complexity</figcaption></figure><figure><img src="images/hexa-tc4-2.jpg" alt="Coupler geometry leaves more room for alignment error" loading="lazy" data-name="hexa-tc4-2.jpg"><figcaption>Coupler geometry leaves more room for alignment error</figcaption></figure><figure><img src="images/hexa-tc4-3.jpg" alt="The cam platform is shaped to work with two motor assemblies instead of three" loading="lazy" data-name="hexa-tc4-3.jpg"><figcaption>The cam platform is shaped to work with two motor assemblies instead of three</figcaption></figure><figure><img src="images/hexa-tc4-4.jpg" alt="Three barrel jacks for data" loading="lazy" data-name="hexa-tc4-4.jpg"><figcaption>Three barrel jacks for data</figcaption></figure></div>
 <h3>Error adjustment</h3>
 <ul><li>The square couplers absorb rotational error.</li><li>Contact forces at the edges align the outer coupler to the inner one.</li><li>The funnel shape of the couplers absorbs translational error.</li></ul>
 <figure><img src="images/hexa-tc4-error.jpg" alt="" loading="lazy" data-name="hexa-tc4-error.jpg"></figure>
@@ -78,19 +75,23 @@
 <figure><img src="images/hexa-tc4-jacks.jpg" alt="" loading="lazy" data-name="hexa-tc4-jacks.jpg"></figure>
 <h3>No magnets</h3>
 <p>The differently shaped platform forces the locking balls into place and lets them fall back passively when unlocking, so magnets are no longer needed. Tolerances still need adjusting.</p>
-<h2>Vibration study: motor mount</h2>
+<h2 id="vibration-study-motor-mount">Vibration study: motor mount</h2>
 <figure><img src="images/hexa-vib-mount.jpg" alt="A simple clamping motor mount I designed for our motors" loading="lazy" data-name="hexa-vib-mount.jpg"><figcaption>A simple clamping motor mount I designed for our motors</figcaption></figure>
 <p>The parts are modeled as isotropic. The bolts are locally bonded to the parts and the clamping face is a fixed geometry. The motors spin at about 14,000 rpm at hover, so I ran the study around the 250 Hz range. The first four modes are shown below.</p>
-<figure><img src="images/hexa-vib-1.jpg" alt="Mode 1: 202.73 Hz" loading="lazy" data-name="hexa-vib-1.jpg"><figcaption>Mode 1: 202.73 Hz</figcaption></figure>
-<figure><img src="images/hexa-vib-2.jpg" alt="Mode 2: 262.42 Hz" loading="lazy" data-name="hexa-vib-2.jpg"><figcaption>Mode 2: 262.42 Hz</figcaption></figure>
-<figure><img src="images/hexa-vib-3.jpg" alt="Mode 3: 356.4 Hz" loading="lazy" data-name="hexa-vib-3.jpg"><figcaption>Mode 3: 356.4 Hz</figcaption></figure>
-<figure><img src="images/hexa-vib-4.jpg" alt="Mode 4: 1726.1 Hz" loading="lazy" data-name="hexa-vib-4.jpg"><figcaption>Mode 4: 1726.1 Hz</figcaption></figure>
+<div class="gallery g3"><figure><img src="images/hexa-vib-1.jpg" alt="Mode 1: 202.73 Hz" loading="lazy" data-name="hexa-vib-1.jpg"><figcaption>Mode 1: 202.73 Hz</figcaption></figure><figure><img src="images/hexa-vib-2.jpg" alt="Mode 2: 262.42 Hz" loading="lazy" data-name="hexa-vib-2.jpg"><figcaption>Mode 2: 262.42 Hz</figcaption></figure><figure><img src="images/hexa-vib-3.jpg" alt="Mode 3: 356.4 Hz" loading="lazy" data-name="hexa-vib-3.jpg"><figcaption>Mode 3: 356.4 Hz</figcaption></figure><figure><img src="images/hexa-vib-4.jpg" alt="Mode 4: 1726.1 Hz" loading="lazy" data-name="hexa-vib-4.jpg"><figcaption>Mode 4: 1726.1 Hz</figcaption></figure></div>
 <p>The first two modes sit closest to the propeller operating range, so I redesigned the mount around them.</p>
+</div>
+</div>
+<nav class="pager wrap" aria-label="More work"><a class="prev" href="vtol.html"><span>Previous</span><strong>VTOL</strong></a><a class="next" href="pneumatic-gripper.html"><span>Next</span><strong>Pneumatic Gripper</strong></a></nav>
 </article>
 </main>
-<footer>
-  <p>Timothy Lee, mechanical engineering at Northeastern University. Boston, MA.</p>
-</footer>
+<footer class="foot"><div class="wrap foot-in">
+  <p class="foot-big">Designed, built,<br>tested, iterated.</p>
+  <div class="foot-meta">
+    <p><strong>Timothy Lee</strong><br>Mechanical engineering, Northeastern University<br>Boston, MA</p>
+    <a class="totop" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+  </div>
+</div></footer>
 <script src="site.js"></script>
 </body>
 </html>

@@ -5,51 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pneumatic Gripper | Timothy Lee</title>
 <meta name="description" content="A soft robotic end-effector for a drone that can pick up many different object shapes.">
+<meta name="theme-color" content="#F3F1EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1013" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF5A1F'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='30' font-weight='800' text-anchor='middle' fill='%23111417'%3ETL%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
-<header class="top">
-  <a class="brand" href="index.html">Timothy Lee</a>
-  <nav aria-label="Main"><a href="index.html">Home</a><a href="sharkninja.html">SharkNinja co-op</a><a href="projects.html" aria-current="page">Projects</a></nav>
-</header>
-<main>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="top-in">
+  <a class="brand" href="index.html"><span class="mark" aria-hidden="true">TL</span><span class="brand-name">Timothy Lee</span></a>
+  <nav aria-label="Main"><a href="index.html#work">Work</a><a href="projects.html" aria-current="page">Projects</a><a href="index.html#about">About</a></nav>
+</div></header>
+<main id="main">
 <article class="project">
-<a class="back" href="projects.html">All projects</a>
+<header class="proj-head"><div class="wrap">
+<a class="back" href="projects.html"><span aria-hidden="true">←</span> All projects</a>
+<p class="kicker"><span>Project 03</span><span>/ 07</span></p>
 <h1>Pneumatic Gripper</h1>
 <p class="lede">A soft robotic end-effector for a drone that can pick up many different object shapes.</p>
 <dl class="meta"><div><dt>Funding</dt><dd>Northeastern PEAK research grant ($1,500)</dd></div><div><dt>My contribution</dt><dd>Everything except the pump and valve breadboard</dd></div><div><dt>Material</dt><dd>30A silicone</dd></div></dl>
-<figure><img src="images/gripper-hero.jpg" alt="" loading="lazy" data-name="gripper-hero.jpg"></figure>
+</div></header>
+<div class="wrap"><figure class="cover"><img src="images/gripper-hero.jpg" alt="" data-name="gripper-hero.jpg"></figure></div>
+<div class="proj-body wrap has-toc">
+<aside class="toc" aria-label="On this page"><p class="toc-h">On this page</p><ol><li><a href="#theory">Theory</a></li><li><a href="#first-iteration">First iteration</a></li><li><a href="#second-iteration">Second iteration</a></li><li><a href="#first-functional-gripper">First functional gripper</a></li></ol></aside>
+<div class="prose">
 <p>Soft robotics is a developing field in which air pumps inflate a shape so that it actuates under different pressures. Skills used: researching, writing a research proposal, making molds, iterative design, pumps and valves, and material science.</p>
-<h2>Theory</h2>
+<h2 id="theory">Theory</h2>
 <p>One side of each finger has bellows that inflate under higher internal pressure while the other side stays the same length. That makes the finger curl.</p>
-<figure><img src="images/gripper-theory-1.jpg" alt="A basic inflatable gripper in action" loading="lazy" data-name="gripper-theory-1.jpg"><figcaption>A basic inflatable gripper in action</figcaption></figure>
-<figure><img src="images/gripper-theory-2.jpg" alt="" loading="lazy" data-name="gripper-theory-2.jpg"></figure>
-<h2>First iteration</h2>
+<div class="gallery g2"><figure><img src="images/gripper-theory-1.jpg" alt="A basic inflatable gripper in action" loading="lazy" data-name="gripper-theory-1.jpg"><figcaption>A basic inflatable gripper in action</figcaption></figure><figure><img src="images/gripper-theory-2.jpg" alt="" loading="lazy" data-name="gripper-theory-2.jpg"></figure></div>
+<h2 id="first-iteration">First iteration</h2>
 <p>As a proof of concept we used a four-finger mold sourced online that came as a single part. We printed the mold, degassed the silicone in a vacuum chamber, and poured it. To test strength, we rigged the gripper against a scale and inflated a single finger with a manual pump. The fingers inflated asymmetrically, so we moved to another model.</p>
-<figure><img src="images/gripper-v1-1.jpg" alt="" loading="lazy" data-name="gripper-v1-1.jpg"></figure>
-<figure><img src="images/gripper-v1-2.jpg" alt="" loading="lazy" data-name="gripper-v1-2.jpg"></figure>
-<figure><img src="images/gripper-v1-3.jpg" alt="" loading="lazy" data-name="gripper-v1-3.jpg"></figure>
-<h2>Second iteration</h2>
+<div class="gallery g3"><figure><img src="images/gripper-v1-1.jpg" alt="" loading="lazy" data-name="gripper-v1-1.jpg"></figure><figure><img src="images/gripper-v1-2.jpg" alt="" loading="lazy" data-name="gripper-v1-2.jpg"></figure><figure><img src="images/gripper-v1-3.jpg" alt="" loading="lazy" data-name="gripper-v1-3.jpg"></figure></div>
+<h2 id="second-iteration">Second iteration</h2>
 <p>The second model, also sourced online and cast the same way, had three fingers instead of four. It showed the same asymmetry. Next we tried casting individual fingers and joining them to a central hub. Most online models are closed source, so I designed the mold myself.</p>
-<figure><img src="images/gripper-v2-inspiration.jpg" alt="The inspiration" loading="lazy" data-name="gripper-v2-inspiration.jpg"><figcaption>The inspiration</figcaption></figure>
-<figure><img src="images/gripper-v2-mold.jpg" alt="Mold shells and core" loading="lazy" data-name="gripper-v2-mold.jpg"><figcaption>Mold shells and core</figcaption></figure>
-<figure><img src="images/gripper-v2-printed.jpg" alt="Printed pieces" loading="lazy" data-name="gripper-v2-printed.jpg"><figcaption>Printed pieces</figcaption></figure>
-<figure><img src="images/gripper-v2-cast.jpg" alt="" loading="lazy" data-name="gripper-v2-cast.jpg"></figure>
+<div class="gallery g3"><figure><img src="images/gripper-v2-inspiration.jpg" alt="The inspiration" loading="lazy" data-name="gripper-v2-inspiration.jpg"><figcaption>The inspiration</figcaption></figure><figure><img src="images/gripper-v2-mold.jpg" alt="Mold shells and core" loading="lazy" data-name="gripper-v2-mold.jpg"><figcaption>Mold shells and core</figcaption></figure><figure><img src="images/gripper-v2-printed.jpg" alt="Printed pieces" loading="lazy" data-name="gripper-v2-printed.jpg"><figcaption>Printed pieces</figcaption></figure><figure><img src="images/gripper-v2-cast.jpg" alt="" loading="lazy" data-name="gripper-v2-cast.jpg"></figure></div>
 <figure class="embed"><iframe src="https://www.youtube.com/embed/cd79CXBYNtk" title="Gripper test video 1" loading="lazy" allowfullscreen></iframe><figcaption>Gripper test video 1</figcaption></figure>
 <figure class="embed"><iframe src="https://www.youtube.com/embed/jf_uEUaGd-g" title="Gripper test video 2" loading="lazy" allowfullscreen></iframe><figcaption>Gripper test video 2</figcaption></figure>
-<h2>First functional gripper</h2>
+<h2 id="first-functional-gripper">First functional gripper</h2>
 <p>After several iterations and many castings, this was the first functional gripper.</p>
-<figure><img src="images/gripper-final-1.jpg" alt="" loading="lazy" data-name="gripper-final-1.jpg"></figure>
-<figure><img src="images/gripper-final-2.jpg" alt="The variable grip geometry system uses involute gears to switch between X-shaped and H-shaped grip configurations, so it can hold different object geometries." loading="lazy" data-name="gripper-final-2.jpg"><figcaption>The variable grip geometry system uses involute gears to switch between X-shaped and H-shaped grip configurations, so it can hold different object geometries.</figcaption></figure>
-<p><a class="ext" href="https://www.youtube.com/shorts/UY0K_xbwRZg">Watch the variable grip geometry demonstration</a></p>
+<div class="gallery g2"><figure><img src="images/gripper-final-1.jpg" alt="" loading="lazy" data-name="gripper-final-1.jpg"></figure><figure><img src="images/gripper-final-2.jpg" alt="The variable grip geometry system uses involute gears to switch between X-shaped and H-shaped grip configurations, so it can hold different object geometries." loading="lazy" data-name="gripper-final-2.jpg"><figcaption>The variable grip geometry system uses involute gears to switch between X-shaped and H-shaped grip configurations, so it can hold different object geometries.</figcaption></figure></div>
+<p><a class="ext" href="https://www.youtube.com/shorts/UY0K_xbwRZg">Watch the variable grip geometry demonstration <span aria-hidden="true">↗</span></a></p>
+</div>
+</div>
+<nav class="pager wrap" aria-label="More work"><a class="prev" href="hexacopter.html"><span>Previous</span><strong>Hexacopter</strong></a><a class="next" href="assistive-powder-board.html"><span>Next</span><strong>Assistive Powder Board</strong></a></nav>
 </article>
 </main>
-<footer>
-  <p>Timothy Lee, mechanical engineering at Northeastern University. Boston, MA.</p>
-</footer>
+<footer class="foot"><div class="wrap foot-in">
+  <p class="foot-big">Designed, built,<br>tested, iterated.</p>
+  <div class="foot-meta">
+    <p><strong>Timothy Lee</strong><br>Mechanical engineering, Northeastern University<br>Boston, MA</p>
+    <a class="totop" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+  </div>
+</div></footer>
 <script src="site.js"></script>
 </body>
 </html>

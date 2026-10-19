@@ -1,43 +1,71 @@
-import html, os
+import html, re
 
 SITE = "Timothy Lee"
-NAV = [("index.html","Home"),("sharkninja.html","SharkNinja co-op"),("projects.html","Projects")]
+NAV = [("index.html#work","Work","work"),("projects.html","Projects","projects"),("index.html#about","About","about")]
 
+# (slug, title, summary, tags, thumbnail)
 PROJECTS = [
- ("vtol","VTOL","Quadcopter VTOL UAV with an FEA-validated wing structure."),
- ("hexacopter","Hexacopter","Drone frame for a 20 lb payload, plus a modular tool-changing system."),
- ("pneumatic-gripper","Pneumatic Gripper","Soft robotic gripper for a drone, funded by a $1,500 PEAK grant."),
- ("assistive-powder-board","Assistive Powder Board","Low-cost powder board that motivates children in wheelchairs to do physical therapy."),
- ("whistle-controlled-decorations","Whistle Controlled Decorations","Arduino circuit that switches a light strip when I whistle."),
- ("gravity-gambit-game","Gravity Gambit","Two-player plinko and target game with automatic scoring."),
- ("chess-set","Chess Set","SolidWorks chess set themed on famous buildings."),
+ ("vtol","VTOL","Quadcopter VTOL UAV with an FEA-validated wing structure.",["Aircraft","FEA","SolidWorks"],"vtol-hero.jpg"),
+ ("hexacopter","Hexacopter","Drone frame for a 20 lb payload, plus a modular tool-changing system.",["Drones","Mechanisms","Vibration"],"hexa-hero.jpg"),
+ ("pneumatic-gripper","Pneumatic Gripper","Soft robotic gripper for a drone, funded by a $1,500 PEAK grant.",["Soft robotics","Molding","Research"],"gripper-hero.jpg"),
+ ("assistive-powder-board","Assistive Powder Board","Low-cost powder board that motivates children in wheelchairs to do physical therapy.",["Client work","Woodworking","Sensors"],"powder-hero.jpg"),
+ ("whistle-controlled-decorations","Whistle Controlled Decorations","Arduino circuit that switches a light strip when I whistle.",["Arduino","IR","Circuits"],"whistle-hero.jpg"),
+ ("gravity-gambit-game","Gravity Gambit","Two-player plinko and target game with automatic scoring.",["Laser cutting","AutoCAD","Teamwork"],"gambit-hero.jpg"),
+ ("chess-set","Chess Set","SolidWorks chess set themed on famous buildings.",["SolidWorks","Surfacing"],"chess-hero-1.jpg"),
 ]
+
+# (slug, company, role, summary, tags, thumbnail)
+EXPERIENCE = [
+ ("notch","Notch","Co-op","Replaced brittle radomes, automated a paint process, and built a ventilated fume enclosure.",["Composites","CNC","G-code","Fusion 360"],"notch-radome-1.jpg"),
+ ("sharkninja","SharkNinja","Mechanical engineering co-op","A patented airflow component headed for 500,000 units, Tesla-valve nozzle research, and test development.",["DFM","Fluids","Testing","Patent"],"sn-suction-chart.jpg"),
+]
+
+FONTS = "https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap"
+FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF5A1F'/%3E"
+           "%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='30' font-weight='800' text-anchor='middle' fill='%23111417'%3ETL%3C/text%3E%3C/svg%3E")
 
 def esc(s): return html.escape(s, quote=True)
 
+# Text wrapped in [brackets] is a note to self ("[Caption]", "[Text: ...]"). It renders hidden and only shows in draft mode.
+def is_draft(s): return bool(s) and s.startswith("[") and s.endswith("]")
+
+def slugify(s): return re.sub(r"[^a-z0-9]+","-",s.lower()).strip("-")
+
+def fig_html(name, cap):
+    cap = "" if is_draft(cap) else cap
+    capel = f"<figcaption>{esc(cap)}</figcaption>" if cap else ""
+    return f'<figure><img src="images/{name}" alt="{esc(cap)}" loading="lazy" data-name="{name}">{capel}</figure>'
+
 def render_blocks(blocks):
-    out=[]
+    out=[]; run=[]
+    def flush():
+        if len(run)==1: out.append(run[0])
+        elif run: out.append(f'<div class="gallery g{min(len(run),3)}">'+"".join(run)+"</div>")
+        run.clear()
     for b in blocks:
         k=b[0]
-        if k=="h2": out.append(f"<h2>{esc(b[1])}</h2>")
+        if k=="fig":
+            run.append(fig_html(b[1], b[2] if len(b)>2 else "")); continue
+        flush()
+        if k=="h2": out.append(f'<h2 id="{slugify(b[1])}">{esc(b[1])}</h2>')
         elif k=="h3": out.append(f"<h3>{esc(b[1])}</h3>")
-        elif k=="p": out.append(f"<p>{esc(b[1])}</p>")
+        elif k=="p": out.append(f'<p class="draft">{esc(b[1])}</p>' if is_draft(b[1]) else f"<p>{esc(b[1])}</p>")
         elif k=="ul": out.append("<ul>"+"".join(f"<li>{esc(i)}</li>" for i in b[1])+"</ul>")
         elif k=="ol": out.append("<ol>"+"".join(f"<li>{esc(i)}</li>" for i in b[1])+"</ol>")
-        elif k=="fig":
-            cap = f"<figcaption>{esc(b[2])}</figcaption>" if len(b)>2 and b[2] else ""
-            out.append(f'<figure><img src="images/{b[1]}" alt="{esc(b[2]) if len(b)>2 else ""}" loading="lazy" data-name="{b[1]}">{cap}</figure>')
         elif k=="video":
-            cap = f"<figcaption>{esc(b[2])}</figcaption>" if len(b)>2 and b[2] else ""
-            out.append(f'<figure><video controls preload="metadata" src="videos/{b[1]}" data-name="{b[1]}"></video>{cap}</figure>')
+            cap = b[2] if len(b)>2 and not is_draft(b[2]) else ""
+            capel = f"<figcaption>{esc(cap)}</figcaption>" if cap else ""
+            out.append(f'<figure class="media"><video controls preload="metadata" src="videos/{b[1]}" data-name="{b[1]}"></video>{capel}</figure>')
         elif k=="yt":
-            out.append(f'<figure class="embed"><iframe src="https://www.youtube.com/embed/{b[1]}" title="{esc(b[2])}" loading="lazy" allowfullscreen></iframe><figcaption>{esc(b[2])}</figcaption></figure>')
+            draft = ' draft' if b[1]=="VIDEO_ID" else ''
+            out.append(f'<figure class="embed{draft}"><iframe src="https://www.youtube.com/embed/{b[1]}" title="{esc(b[2])}" loading="lazy" allowfullscreen></iframe><figcaption>{esc(b[2])}</figcaption></figure>')
         elif k=="link":
-            out.append(f'<p><a class="ext" href="{b[1]}">{esc(b[2])}</a></p>')
+            out.append(f'<p><a class="ext" href="{b[1]}">{esc(b[2])} <span aria-hidden="true">↗</span></a></p>')
+    flush()
     return "\n".join(out)
 
 def page(fname, title, desc, body, current):
-    nav = "".join(f'<a href="{h}"{" aria-current=\"page\"" if h==current else ""}>{esc(t)}</a>' for h,t in NAV)
+    nav = "".join(f'<a href="{h}"{" aria-current=\"page\"" if key==current else ""}>{esc(t)}</a>' for h,t,key in NAV)
     doc = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,38 +73,91 @@ def page(fname, title, desc, body, current):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)} | {SITE}</title>
 <meta name="description" content="{esc(desc)}">
+<meta name="theme-color" content="#F3F1EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1013" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="{FAVICON}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link href="{FONTS}" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
-<header class="top">
-  <a class="brand" href="index.html">{SITE}</a>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="top-in">
+  <a class="brand" href="index.html"><span class="mark" aria-hidden="true">TL</span><span class="brand-name">{SITE}</span></a>
   <nav aria-label="Main">{nav}</nav>
-</header>
-<main>
+</div></header>
+<main id="main">
 {body}
 </main>
-<footer>
-  <p>{SITE}, mechanical engineering at Northeastern University. Boston, MA.</p>
-</footer>
+<footer class="foot"><div class="wrap foot-in">
+  <p class="foot-big">Designed, built,<br>tested, iterated.</p>
+  <div class="foot-meta">
+    <p><strong>{SITE}</strong><br>Mechanical engineering, Northeastern University<br>Boston, MA</p>
+    <a class="totop" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+  </div>
+</div></footer>
 <script src="site.js"></script>
 </body>
 </html>
 """
-    open(fname,"w",encoding="utf-8").write(doc)
+    open(fname,"w",encoding="utf-8",newline="\n").write(doc)
 
-def project_page(slug,title,summary,meta,blocks,back=("projects.html","All projects")):
+def tags_html(tags): return '<span class="tags">'+"".join(f"<span>{esc(t)}</span>" for t in tags)+"</span>"
+
+def card(slug,title,summary,tags,thumb,num):
+    return f"""<a class="card" href="{slug}.html">
+  <span class="card-media"><img src="images/{thumb}" alt="" loading="lazy" data-thumb></span>
+  <span class="card-body"><span class="card-num">{num:02d}</span><span class="card-t">{esc(title)}</span><span class="card-d">{esc(summary)}</span>{tags_html(tags)}</span>
+</a>"""
+
+def project_cards(): return '<div class="cards">'+"".join(card(s,t,d,tg,th,i+1) for i,(s,t,d,tg,th) in enumerate(PROJECTS))+"</div>"
+
+def xp_cards():
+    out=[]
+    for i,(slug,co,role,summ,tags,thumb) in enumerate(EXPERIENCE):
+        out.append(f"""<a class="xp" href="{slug}.html">
+  <span class="xp-media"><img src="images/{thumb}" alt="" loading="lazy" data-thumb><span class="xp-mono" aria-hidden="true">{esc(co[0])}</span></span>
+  <span class="xp-body"><span class="card-num">{role}</span><span class="xp-t">{esc(co)}</span><span class="card-d">{esc(summ)}</span>{tags_html(tags)}<span class="more">Read the case study <span aria-hidden="true">→</span></span></span>
+</a>""")
+    return '<div class="xps">'+"".join(out)+"</div>"
+
+def project_page(slug,title,summary,meta,blocks,kicker,back,current,thumb=None,prev=None,nxt=None):
+    blocks=list(blocks)
+    cover=""
+    if blocks and blocks[0][0]=="fig" and blocks[0][1]==thumb:
+        cap = blocks[0][2] if len(blocks[0])>2 else ""
+        cover = f'<div class="wrap">{fig_html(thumb, cap).replace("<figure>","<figure class=\"cover\">",1).replace(" loading=\"lazy\"","",1)}</div>'
+        blocks=blocks[1:]
     metahtml = "".join(f"<div><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>" for k,v in meta)
+    h2s=[b[1] for b in blocks if b[0]=="h2"]
+    toc = ""
+    if len(h2s)>=2:
+        toc = '<aside class="toc" aria-label="On this page"><p class="toc-h">On this page</p><ol>'+"".join(f'<li><a href="#{slugify(h)}">{esc(h)}</a></li>' for h in h2s)+"</ol></aside>"
+    pager=""
+    if prev or nxt:
+        def pl(cls,label,p):
+            return f'<a class="{cls}" href="{p[0]}.html"><span>{label}</span><strong>{esc(p[1])}</strong></a>' if p else '<span></span>'
+        pager = f'<nav class="pager wrap" aria-label="More work">{pl("prev","Previous",prev)}{pl("next","Next",nxt)}</nav>'
     body = f"""<article class="project">
-<a class="back" href="{back[0]}">{esc(back[1])}</a>
+<header class="proj-head"><div class="wrap">
+<a class="back" href="{back[0]}"><span aria-hidden="true">←</span> {esc(back[1])}</a>
+<p class="kicker">{kicker}</p>
 <h1>{esc(title)}</h1>
 <p class="lede">{esc(summary)}</p>
 <dl class="meta">{metahtml}</dl>
+</div></header>
+{cover}
+<div class="proj-body wrap{' has-toc' if toc else ''}">
+{toc}
+<div class="prose">
 {render_blocks(blocks)}
+</div>
+</div>
+{pager}
 </article>"""
-    page(f"{slug}.html", title, summary, body, back[0])
+    page(f"{slug}.html", title, summary, body, current)
 
 # ---------------- content ----------------
 P = {}
@@ -241,9 +322,54 @@ P["chess-set"]=("Chess Set","A custom chess set themed on famous buildings, buil
   ("h3","Leaning Tower of Pisa: Pawn"),
  ])
 
-for slug,title,summ in PROJECTS:
+
+for i,(slug,title,summ,tags,thumb) in enumerate(PROJECTS):
     t,s,meta,blocks = P[slug]
-    project_page(slug,t,s,meta,blocks)
+    prev = PROJECTS[i-1][:2] if i>0 else None
+    nxt = PROJECTS[i+1][:2] if i<len(PROJECTS)-1 else None
+    project_page(slug,t,s,meta,blocks,f"<span>Project {i+1:02d}</span><span>/ {len(PROJECTS):02d}</span>",
+                 ("projects.html","All projects"),"projects",thumb,prev,nxt)
+
+# ---- Notch
+notch_meta=[("Role","Co-op"),("Tools","SolidWorks, Fusion 360, CNC machining, G-code, 3D printing"),("Focus","Radomes, automated painting, fume enclosure")]
+notch_blocks=[
+ ("p","Three projects from my co-op at Notch."),
+ ("h2","Glass-fiber-reinforced polyurethane radomes"),
+ ("p","I replaced brittle 3D-printed radomes with glass-fiber-reinforced polyurethane radomes by designing and 3D-printing the molds in SolidWorks. The new radomes are now on production units and survive 10 ft drops that shattered the previous version."),
+ ("fig","notch-radome-1.jpg","A glass-fiber-reinforced polyurethane radome"),
+ ("p","The previous radomes were 3D printed. We optimized them to be as strong and good looking as possible, but even with specialty filaments and extremely fine print resolution they were severely limited."),
+ ("fig","notch-radome-2.jpg","Mold with PLA outer halves and a soft TPU inner shell"),
+ ("p","The new radomes are cast in 3D-printed molds. The outer halves are hard, made from PLA. The inner shell is soft TPU with a rigid skeleton, so the mold comes apart easily after casting. The soft TPU part also leaves threaded inserts in the radome, which are used to mount the antenna inside."),
+ ("fig","notch-radome-3.jpg","Mold with a vapor-smoothed ASA inner jacket"),
+ ("p","This type of mold has a vapor-smoothed ASA inner jacket that leaves the cast radome with a smooth finish that needs no post-processing. On previous versions, sanding out the layer lines left by the molds took a lot of time and effort."),
+ ("fig","notch-radome-4.jpg","[Caption]"),
+ ("p","[Text: drop testing and results]"),
+ ("fig","notch-radome-5.jpg","[Caption]"),
+ ("p","[Text: the radomes on production units]"),
+ ("h2","Automated paint application with a CNC spray gantry"),
+ ("p","I automated a proprietary paint application process by building a CNC spray gantry and writing custom G-code to drive the paint gun. The project combined mechanical, electrical, and software design to produce consistent coats for a performance-sensitive application."),
+ ("fig","notch-gantry-1.jpg","An early version of the spray gantry"),
+ ("p","The gantry is built from an HVLP spray gun mounted on a commercial laser engraver. Air for the gun comes from a compressor, passes through a solenoid valve and a regulator, and then enters the gun."),
+ ("fig","notch-gantry-2.jpg","The engraver's motherboard"),
+ ("p","Controlling the spray with G-code is the best approach, and that means controlling the air through G-code too. To do that, I used a DMM to test different ports and G-code commands on the board, looking for one that gave a high/low output, which is what a solenoid needs. I found a working port that responds to mist coolant commands, and I built a driver circuit on it to switch the solenoid valve."),
+ ("fig","notch-gantry-3.jpg","A spray pattern drawn in Fusion 360"),
+ ("fig","notch-gantry-4.jpg","The Python script that processes the G-code"),
+ ("p","Any pattern drawn in Fusion 360 can be turned into G-code, but that G-code has to be processed specifically for the spray gantry. I wrote a Python script that, among other things, wraps the spindle commands in coolant commands so the G-code switches the air on and off and applies the paint correctly."),
+ ("fig","notch-gantry-5.jpg","Universal G-code Sender (UGS)"),
+ ("p","After I send the G-code with UGS, the gantry goes to work."),
+ ("yt","VIDEO_ID","The gantry applying a coat"),
+ ("video","notch-gantry-video-2.mp4","[Caption]"),
+ ("p","[Text: coating results and consistency]"),
+ ("h2","Ventilated fume enclosure with active exhaust"),
+ ("p","I enabled the automated coating process to run safely in-house by designing a ventilated fume enclosure with active exhaust in Fusion 360 and CNC-machining parts of it."),
+ ("fig","notch-fume-1.jpg","CAD model of the full fume enclosure"),
+ ("p","The enclosure frame is made from 8020, with polycarbonate panels cut to fit in the sides. 3D-printed clamps hold each panel in place and squeeze themselves tight when the sheet is inserted. A plastic cover is velcroed onto the front and sides to give access to the spray gantry."),
+ ("fig","notch-fume-2.jpg","The control board and exhaust fan"),
+ ("p","To ventilate the toxic fumes, I printed custom brackets that hold an exhaust fan in place and connected it to foil ducting that carries the fumes out through the window. To protect the board from the spray, I made another custom bracket that mounts the board and solenoid driver outside the enclosure."),
+ ("fig","notch-fume-3.jpg","The complete enclosure"),
+]
+project_page("notch","Notch",EXPERIENCE[0][3],notch_meta,notch_blocks,"<span>Experience 01</span><span>/ 02</span>",
+             ("index.html#work","All work"),"work",None,None,("sharkninja","SharkNinja"))
 
 # ---- SharkNinja
 sn_meta=[("Role","Mechanical engineering co-op"),("Focus","Corded vacuums"),("Note","Unreleased product details are under NDA")]
@@ -276,34 +402,57 @@ sn_blocks=[
  ("p","Using an oscilloscope and a pressure sensor, I compared the old working program (orange, top) with the new failing one (blue, bottom)."),
  ("fig","sn-pressure-2.jpg",""),("fig","sn-pressure-3.jpg",""),
 ]
-project_page("sharkninja","SharkNinja co-op","Corded vacuum design and testing: a patented airflow component, nozzle research, and test development.",sn_meta,sn_blocks,back=("index.html","Home"))
-# fix nav highlight for sharkninja
-s=open("sharkninja.html",encoding="utf-8").read()
-s=s.replace('<a href="index.html">Home</a>','<a href="index.html">Home</a>',1)
-open("sharkninja.html","w",encoding="utf-8").write(s)
+project_page("sharkninja","SharkNinja co-op","Corded vacuum design and testing: a patented airflow component, nozzle research, and test development.",sn_meta,sn_blocks,
+             "<span>Experience 02</span><span>/ 02</span>",("index.html#work","All work"),"work",None,("notch","Notch"),("vtol","Projects: VTOL"))
 
 # ---- projects index
-rows="".join(f'<li><a href="{s}.html"><span class="t">{esc(t)}</span><span class="d">{esc(d)}</span></a></li>' for s,t,d in PROJECTS)
 page("projects.html","Projects","Mechanical, robotics, and electronics projects by Timothy Lee.",
- f'<section class="list-page"><h1>Projects</h1><ul class="rows">{rows}</ul></section>',"projects.html")
+ f"""<section class="list-page wrap">
+<p class="kicker"><span>Index</span><span>/ {len(PROJECTS):02d} projects</span></p>
+<h1>Projects</h1>
+<p class="lede">Drones, soft robots, assistive devices, and a few things built for fun. Every one of them went through CAD, a prototype, and more than one redesign.</p>
+{project_cards()}
+</section>""","projects")
 
 # ---- home
-home = f"""<section class="hero">
-  <h1>Timothy Lee</h1>
-  <p class="hero-sub">Mechanical engineering student at Northeastern University, building drones, grippers, and consumer products.</p>
+FIGS = [("vtol-hero.jpg","Fig. 01","VTOL airframe"),("hexa-hero.jpg","Fig. 02","Hexacopter frame"),("gripper-hero.jpg","Fig. 03","Soft gripper")]
+figs = "".join(f'<figure class="hf hf{i+1}"><img src="images/{f}" alt="{esc(c)}" data-thumb><figcaption><span>{n}</span>{esc(c)}</figcaption></figure>' for i,(f,n,c) in enumerate(FIGS))
+STATS = [("500k","units planned for my patent-pending SharkNinja airflow component"),
+         ("10 ft","drops survived by the cast radomes I designed at Notch"),
+         ("$1,500","Northeastern PEAK research grant for a soft robotic gripper"),
+         (f"{len(PROJECTS)+len(EXPERIENCE)}","case studies, from FEA-validated wings to an Arduino that hears whistles")]
+stats = "".join(f'<div class="stat"><dt>{esc(v)}</dt><dd>{esc(d)}</dd></div>' for v,d in STATS)
+home = f"""<section class="hero"><div class="wrap hero-in">
+  <div class="hero-text">
+    <p class="kicker"><span>Mechanical engineering</span><span>Northeastern University</span></p>
+    <h1>Timothy<br>Lee<span class="dot" aria-hidden="true">.</span></h1>
+    <p class="hero-sub">I design and build drones, soft robotic grippers, and consumer products, from CAD and simulation all the way to the shop floor.</p>
+    <p class="cta"><a class="btn" href="#work">See my work <span aria-hidden="true">↓</span></a><a class="btn ghost" href="#about">About me</a></p>
+  </div>
+  <div class="hero-art">{figs}</div>
+</div></section>
+<section class="stats-band"><dl class="wrap stats">{stats}</dl></section>
+<section class="section wrap" id="work">
+  <div class="sec-head"><p class="kicker"><span>01</span><span>Experience</span></p><h2>Work</h2></div>
+  {xp_cards()}
 </section>
-<section class="about">
-  <p>I'm a third-year mechanical engineering major at Northeastern University, from Boston, Massachusetts. I love throwing myself into new things, which has led me to hiking, camping, travel, competitive spikeball, table tennis, and other sports. At school I'm an active member of AerospaceNU and Rev, an entrepreneurship club.</p>
-  <p>My first co-op was at SharkNinja, working on corded vacuums. My proudest achievement there was inventing a patented component that greatly improved the performance of a headlining Shark product.</p>
-  <p>Next I want to learn as much as I can in industry, then take those skills out on my own and start a tech company.</p>
+<section class="section wrap" id="projects">
+  <div class="sec-head"><p class="kicker"><span>02</span><span>Selected projects</span></p><h2>Projects</h2><a class="sec-link" href="projects.html">Project index <span aria-hidden="true">→</span></a></div>
+  {project_cards()}
 </section>
-<section class="featured">
-  <h2>Experience</h2>
-  <ul class="rows">
-    <li><a href="sharkninja.html"><span class="t">SharkNinja co-op</span><span class="d">A patented airflow component headed for 500,000 units, Tesla-valve nozzle research, and test development.</span></a></li>
-  </ul>
-  <h2>Projects</h2>
-  <ul class="rows">{rows}</ul>
+<section class="section wrap about" id="about">
+  <div class="sec-head"><p class="kicker"><span>03</span><span>About</span></p><h2>Hi, I'm Timothy.</h2></div>
+  <div class="about-body">
+    <p class="about-lead">I'm a third-year mechanical engineering major at Northeastern University, from Boston, Massachusetts.</p>
+    <p>I love throwing myself into new things, which has led me to hiking, camping, travel, competitive spikeball, table tennis, and other sports. At school I'm an active member of AerospaceNU and Rev, an entrepreneurship club.</p>
+    <p>My first co-op was at SharkNinja, working on corded vacuums. My proudest achievement there was inventing a patented component that greatly improved the performance of a headlining Shark product.</p>
+    <p>Next I want to learn as much as I can in industry, then take those skills out on my own and start a tech company.</p>
+    <dl class="facts">
+      <div><dt>Clubs</dt><dd>{tags_html(["AerospaceNU","Rev"])}</dd></div>
+      <div><dt>Toolbox</dt><dd>{tags_html(["SolidWorks","Fusion 360","FEA","AutoCAD","3D printing","CNC","Laser cutting","Arduino","Python"])}</dd></div>
+      <div><dt>Off the clock</dt><dd>{tags_html(["Hiking","Camping","Travel","Spikeball","Table tennis"])}</dd></div>
+    </dl>
+  </div>
 </section>"""
-page("index.html","Portfolio","Timothy Lee, mechanical engineering student at Northeastern University. Drones, soft robotics, and consumer product design.",home,"index.html")
+page("index.html","Portfolio","Timothy Lee, mechanical engineering student at Northeastern University. Drones, soft robotics, and consumer product design.",home,"home")
 print("built")
