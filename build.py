@@ -1,6 +1,12 @@
 import html, re
 
 SITE = "Timothy Lee"
+EMAIL = "lee.tim@northeastern.edu"
+LINKEDIN = "https://www.linkedin.com/in/timothy-lee-6a5a56290/"
+CONTACT = (f'<span class="contact">'
+  f'<a href="mailto:{EMAIL}" title="{EMAIL}"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg><span class="c-label">Email</span></a>'
+  f'<a href="{LINKEDIN}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3.5"/><path d="M8 10.5V16M8 7.75v.01M11.5 16v-5.5M11.5 13c0-1.6 1-2.6 2.4-2.6 1.4 0 2.1.9 2.1 2.6V16"/></svg><span class="c-label">LinkedIn</span></a>'
+  f'</span>')
 NAV = [("index.html#work","Work","work"),("projects.html","Projects","projects"),("index.html#about","About","about")]
 
 # (slug, title, summary, tags, thumbnail)
@@ -99,7 +105,7 @@ def page(fname, title, desc, body, current):
 <a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="top-in">
   <a class="brand" href="index.html"><span class="mark" aria-hidden="true">TL</span><span class="brand-name">{SITE}</span></a>
-  <nav aria-label="Main">{nav}</nav>
+  <div class="top-right"><nav aria-label="Main">{nav}</nav>{CONTACT}</div>
 </div></header>
 <main id="main">
 {body}
@@ -471,6 +477,8 @@ home = f"""<section class="hero"><div class="wrap hero-in">
 </section>
 <section class="section wrap about" id="about">
   <div class="sec-head"><p class="kicker"><span>03</span><span>About</span></p><h2>Hi, I'm Timothy.</h2></div>
+  <div class="about-grid">
+  <figure class="portrait"><img src="images/me.jpg" alt="Timothy Lee" data-name="me.jpg"></figure>
   <div class="about-body">
     <p class="about-lead">I'm a third-year mechanical engineering major at Northeastern University, from Boston, Massachusetts.</p>
     <p>I love throwing myself into new things, which has led me to hiking, camping, travel, competitive spikeball, table tennis, and other sports. At school I'm an active member of AerospaceNU and Rev, an entrepreneurship club.</p>
@@ -481,6 +489,7 @@ home = f"""<section class="hero"><div class="wrap hero-in">
       <div><dt>Toolbox</dt><dd>{tags_html(["SolidWorks","Fusion 360","FEA","AutoCAD","3D printing","CNC","Laser cutting","Arduino","Python"])}</dd></div>
       <div><dt>Off the clock</dt><dd>{tags_html(["Hiking","Camping","Travel","Spikeball","Table tennis"])}</dd></div>
     </dl>
+  </div>
   </div>
 </section>"""
 page("index.html","Portfolio","Timothy Lee, mechanical engineering student at Northeastern University. Drones, soft robotics, and consumer product design.",home,"home")
