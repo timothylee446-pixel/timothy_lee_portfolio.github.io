@@ -105,7 +105,6 @@ def page(fname, title, desc, body, current):
 {body}
 </main>
 <footer class="foot"><div class="wrap foot-in">
-  <p class="foot-big">Designed, built,<br>tested, iterated.</p>
   <div class="foot-meta">
     <p><strong>{SITE}</strong><br>Mechanical engineering, Northeastern University<br>Boston, MA</p>
     <a class="totop" href="#top">Back to top <span aria-hidden="true">↑</span></a>

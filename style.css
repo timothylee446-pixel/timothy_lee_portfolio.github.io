@@ -272,10 +272,8 @@ figcaption{font-size:.85rem;line-height:1.45;color:var(--muted);margin-top:.65re
 
 /* ---------- footer ---------- */
 .foot{margin-top:clamp(4rem,9vw,7rem);background:var(--foot-bg);color:var(--foot-ink)}
-.foot-in{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:2rem;padding-block:clamp(3rem,7vw,5rem) 2.5rem}
-.foot-big{margin:0;font-size:clamp(2.4rem,7vw,5.5rem);font-weight:850;letter-spacing:-.045em;line-height:.92;font-variation-settings:"wdth" 110}
-.foot-big::after{content:".";color:var(--accent)}
-.foot-meta{display:flex;flex-direction:column;align-items:flex-start;gap:1.25rem;font-size:.9rem;line-height:1.55;color:color-mix(in srgb,var(--foot-ink) 70%,var(--foot-bg))}
+.foot-in{padding-block:2.5rem}
+.foot-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.25rem 2rem;font-size:.9rem;line-height:1.55;color:color-mix(in srgb,var(--foot-ink) 70%,var(--foot-bg))}
 .foot-meta p{margin:0}
 .foot-meta strong{color:var(--foot-ink)}
 .totop{color:var(--foot-ink);font-weight:600;text-decoration:none;padding:.55rem 1rem;border-radius:999px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--foot-ink) 30%,var(--foot-bg))}
