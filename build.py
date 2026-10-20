@@ -2,6 +2,8 @@ import html, re
 
 SITE = "Timothy Lee"
 EMAIL = "lee.tim@northeastern.edu"
+# Umami Cloud analytics (dashboard at cloud.umami.is). data-domains keeps local previews from being counted.
+ANALYTICS = '<script defer src="https://cloud.umami.is/script.js" data-website-id="2ed9bc1a-4ee3-46d4-aca5-d03093c6ba17" data-domains="timothylee446-pixel.github.io"></script>'
 LINKEDIN = "https://www.linkedin.com/in/timothy-lee-6a5a56290/"
 CONTACT = (f'<span class="contact">'
   f'<a href="mailto:{EMAIL}" title="{EMAIL}"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg><span class="c-label">Email</span></a>'
@@ -100,6 +102,7 @@ def page(fname, title, desc, body, current):
 <link href="{FONTS}" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script>document.documentElement.classList.add('js')</script>
+{ANALYTICS}
 </head>
 <body id="top">
 <a class="skip" href="#main">Skip to content</a>
