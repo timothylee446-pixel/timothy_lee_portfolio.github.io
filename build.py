@@ -464,7 +464,7 @@ home = f"""<section class="hero"><div class="wrap hero-in">
   <div class="hero-text">
     <p class="kicker"><span>Mechanical engineering</span><span>Northeastern University</span></p>
     <h1>Timothy<br>Lee<span class="dot" aria-hidden="true">.</span></h1>
-    <p class="hero-sub">I design and build drones, soft robotic grippers, and consumer products, plus the molds and machines that make them, from CAD and simulation to the shop floor.</p>
+    <p class="hero-sub">Drones, soft robotics, consumer products, CNC, and more. Design to fabrication.</p>
     <p class="cta"><a class="btn" href="#work">See my work <span aria-hidden="true">↓</span></a><a class="btn ghost" href="#about">About me</a></p>
   </div>
   <div class="hero-art">{figs}</div>
