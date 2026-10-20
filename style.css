@@ -243,6 +243,10 @@ figcaption{font-size:.85rem;line-height:1.45;color:var(--muted);margin-top:.65re
   color:var(--muted);font-family:var(--mono);font-size:.75rem;text-align:center;padding:1rem;
   background-image:repeating-linear-gradient(-45deg,transparent 0 10px,var(--grid) 10px 11px)}
 .missing strong{font-family:var(--sans);font-size:.9rem;color:var(--ink-2)}
+.missing.pending{gap:.6rem;border-style:solid;border-color:var(--line);background-color:var(--surface)}
+.pending-icon{width:1.6rem;height:1.6rem;border-radius:999px;border:1.5px solid var(--accent);position:relative}
+.pending-icon::before{content:"";position:absolute;left:50%;top:50%;width:1.5px;height:.5rem;background:var(--accent);transform-origin:50% 100%;translate:-50% -100%}
+.pending-icon::after{content:"";position:absolute;left:50%;top:50%;width:.4rem;height:1.5px;background:var(--accent);translate:0 -50%}
 .draft{display:none}
 .show-drafts .draft{display:block;font-family:var(--mono);font-size:.85rem;color:var(--accent-ink);background:var(--accent-soft);padding:.6rem .8rem;border-radius:var(--r-sm)}
 

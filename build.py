@@ -24,6 +24,8 @@ FONTS = "https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100.
 FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF5A1F'/%3E"
            "%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='30' font-weight='800' text-anchor='middle' fill='%23111417'%3ETL%3C/text%3E%3C/svg%3E")
 
+PENDING = ' data-pending="Awaiting confidentiality approval"'
+
 def esc(s): return html.escape(s, quote=True)
 
 # Text wrapped in [brackets] is a note to self ("[Caption]", "[Text: ...]"). It renders hidden and only shows in draft mode.
@@ -31,12 +33,13 @@ def is_draft(s): return bool(s) and s.startswith("[") and s.endswith("]")
 
 def slugify(s): return re.sub(r"[^a-z0-9]+","-",s.lower()).strip("-")
 
-def fig_html(name, cap):
+# pending=True marks media waiting on approval: until the file is added, the live site shows a labeled placeholder instead of hiding it.
+def fig_html(name, cap, pending=False):
     cap = "" if is_draft(cap) else cap
     capel = f"<figcaption>{esc(cap)}</figcaption>" if cap else ""
-    return f'<figure><img src="images/{name}" alt="{esc(cap)}" loading="lazy" data-name="{name}">{capel}</figure>'
+    return f'<figure><img src="images/{name}" alt="{esc(cap)}" loading="lazy" data-name="{name}"{PENDING if pending else ""}>{capel}</figure>'
 
-def render_blocks(blocks):
+def render_blocks(blocks, pending=False):
     out=[]; run=[]
     def flush():
         if len(run)==1: out.append(run[0])
@@ -45,7 +48,7 @@ def render_blocks(blocks):
     for b in blocks:
         k=b[0]
         if k=="fig":
-            run.append(fig_html(b[1], b[2] if len(b)>2 else "")); continue
+            run.append(fig_html(b[1], b[2] if len(b)>2 else "", pending)); continue
         if k=="loop":
             cap = b[2] if len(b)>2 else ""
             capel = f"<figcaption>{esc(cap)}</figcaption>" if cap else ""
@@ -59,7 +62,7 @@ def render_blocks(blocks):
         elif k=="video":
             cap = b[2] if len(b)>2 and not is_draft(b[2]) else ""
             capel = f"<figcaption>{esc(cap)}</figcaption>" if cap else ""
-            out.append(f'<figure class="media"><video controls preload="metadata" src="videos/{b[1]}" data-name="{b[1]}"></video>{capel}</figure>')
+            out.append(f'<figure class="media"><video controls preload="metadata" src="videos/{b[1]}" data-name="{b[1]}"{PENDING if pending else ""}></video>{capel}</figure>')
         elif k=="yt":
             draft = ' draft' if b[1]=="VIDEO_ID" else ''
             out.append(f'<figure class="embed{draft}"><iframe src="https://www.youtube.com/embed/{b[1]}" title="{esc(b[2])}" loading="lazy" allowfullscreen></iframe><figcaption>{esc(b[2])}</figcaption></figure>')
@@ -127,7 +130,7 @@ def xp_cards():
 </a>""")
     return '<div class="xps">'+"".join(out)+"</div>"
 
-def project_page(slug,title,summary,meta,blocks,kicker,back,current,thumb=None,prev=None,nxt=None):
+def project_page(slug,title,summary,meta,blocks,kicker,back,current,thumb=None,prev=None,nxt=None,pending=False):
     blocks=list(blocks)
     cover=""
     if blocks and blocks[0][0]=="fig" and blocks[0][1]==thumb:
@@ -156,7 +159,7 @@ def project_page(slug,title,summary,meta,blocks,kicker,back,current,thumb=None,p
 <div class="proj-body wrap{' has-toc' if toc else ''}">
 {toc}
 <div class="prose">
-{render_blocks(blocks)}
+{render_blocks(blocks, pending)}
 </div>
 </div>
 {pager}
@@ -373,7 +376,7 @@ notch_blocks=[
  ("fig","notch-fume-3.jpg","The complete enclosure"),
 ]
 project_page("notch","Notch",EXPERIENCE[0][3],notch_meta,notch_blocks,"<span>Experience 01</span><span>/ 02</span>",
-             ("index.html#work","All work"),"work",None,None,("sharkninja","SharkNinja"))
+             ("index.html#work","All work"),"work",None,None,("sharkninja","SharkNinja"),pending=True)
 
 # ---- SharkNinja
 sn_meta=[("Role","Mechanical engineering co-op"),("Focus","Corded vacuums"),("Note","Unreleased product details are under NDA")]

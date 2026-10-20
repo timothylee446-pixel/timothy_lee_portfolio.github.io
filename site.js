@@ -9,6 +9,15 @@ if(drafts) root.classList.add('show-drafts');
 // Shows a labeled placeholder when an image or video file has not been added yet.
 function missing(el){
   var fig=el.closest('figure');
+  if(el.dataset.pending){
+    var p=document.createElement('div');
+    p.className='missing pending';
+    p.innerHTML='<span class="pending-icon" aria-hidden="true"></span><strong></strong>';
+    p.querySelector('strong').textContent=el.dataset.pending;
+    if(drafts) p.appendChild(document.createTextNode('Add file: '+el.dataset.name));
+    el.replaceWith(p);
+    return;
+  }
   if(!drafts){
     if(fig){ fig.hidden=true; var g=fig.parentElement; if(g.classList.contains('gallery')&&!g.querySelector('figure:not([hidden])')) g.hidden=true; }
     else el.hidden=true;
