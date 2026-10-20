@@ -4,7 +4,11 @@ SITE = "Timothy Lee"
 NAV = [("index.html#work","Work","work"),("projects.html","Projects","projects"),("index.html#about","About","about")]
 
 # (slug, title, summary, tags, thumbnail)
+# Projects still in progress get an "Ongoing" marker on their card and page.
+ONGOING = {"cas"}
+
 PROJECTS = [
+ ("cas","CAS","Contamination-aware sampling robot that takes water samples, then cleans and verifies its own sampling tool.",["Robotics","Fluid systems","Patent pending"],"cas-cad.jpg"),
  ("vtol","VTOL","Quadcopter VTOL UAV with an FEA-validated wing structure.",["Aircraft","FEA","SolidWorks"],"vtol-hero.jpg"),
  ("hexacopter","Hexacopter","Drone frame for a 20 lb payload, plus a modular tool-changing system.",["Drones","Mechanisms","Vibration"],"hexa-hero.jpg"),
  ("pneumatic-gripper","Pneumatic Gripper","Soft robotic gripper for a drone, funded by a $1,500 PEAK grant.",["Soft robotics","Molding","Research"],"gripper-hero.jpg"),
@@ -49,6 +53,8 @@ def render_blocks(blocks, pending=False):
         k=b[0]
         if k=="fig":
             run.append(fig_html(b[1], b[2] if len(b)>2 else "", pending)); continue
+        if k=="figw":  # a figure that always gets its own full-width row, for detailed images like tables
+            flush(); out.append(fig_html(b[1], b[2] if len(b)>2 else "", pending).replace("<figure>","<figure class=\"wide\">",1)); continue
         if k=="loop":
             cap = b[2] if len(b)>2 else ""
             capel = f"<figcaption>{esc(cap)}</figcaption>" if cap else ""
@@ -113,9 +119,11 @@ def page(fname, title, desc, body, current):
 
 def tags_html(tags): return '<span class="tags">'+"".join(f"<span>{esc(t)}</span>" for t in tags)+"</span>"
 
+ONGOING_BADGE = '<span class="badge"><span class="pulse" aria-hidden="true"></span>Ongoing</span>'
+
 def card(slug,title,summary,tags,thumb,num):
     return f"""<a class="card" href="{slug}.html">
-  <span class="card-media"><img src="images/{thumb}" alt="" loading="lazy" data-thumb></span>
+  <span class="card-media"><img src="images/{thumb}" alt="" loading="lazy" data-thumb>{ONGOING_BADGE if slug in ONGOING else ""}</span>
   <span class="card-body"><span class="card-num">{num:02d}</span><span class="card-t">{esc(title)}</span><span class="card-d">{esc(summary)}</span>{tags_html(tags)}</span>
 </a>"""
 
@@ -168,6 +176,19 @@ def project_page(slug,title,summary,meta,blocks,kicker,back,current,thumb=None,p
 
 # ---------------- content ----------------
 P = {}
+
+P["cas"]=("CAS","A contamination-aware sampling robot that takes water samples, then cleans its sampling tool and verifies that it is clean.",
+ [("Status","Ongoing"),("Type","Venture group project"),("IP","Patent pending"),("Skills","Part specification, materials, research, CAD, 3D printing")],
+ [("fig","cas-cad.jpg","CAD of the CAS system"),
+  ("p","CAS (contamination-aware sampling) is a venture group project with a patent pending. The objective is a robot that takes water samples, then cleans the sampling tool and verifies that it is clean before the next sample."),
+  ("p","The system has three main parts:"),
+  ("ul",["A central robot arm","A sample rack","A decontamination station"]),
+  ("h2","Decontamination station"),
+  ("p","The decontamination station cleans the sampling tool after each sample and checks that it is clean."),
+  ("p","[Text: the challenges of designing the decontamination station]"),
+  ("figw","cas-decon-diagram.jpg","Fluid system control diagram"),
+  ("figw","cas-bom.png","Order BOM for the decontamination station"),
+ ])
 
 P["vtol"]=("VTOL","Create a quadcopter VTOL (vertical take-off and landing) UAV.",
  [("Status","Fabrication ongoing"),("Tools","SolidWorks CAD and FEA"),("Materials","Aero PLA, woven carbon fiber tubes")],
@@ -334,7 +355,7 @@ for i,(slug,title,summ,tags,thumb) in enumerate(PROJECTS):
     t,s,meta,blocks = P[slug]
     prev = PROJECTS[i-1][:2] if i>0 else None
     nxt = PROJECTS[i+1][:2] if i<len(PROJECTS)-1 else None
-    project_page(slug,t,s,meta,blocks,f"<span>Project {i+1:02d}</span><span>/ {len(PROJECTS):02d}</span>",
+    project_page(slug,t,s,meta,blocks,f"<span>Project {i+1:02d}</span><span>/ {len(PROJECTS):02d}</span>"+(ONGOING_BADGE if slug in ONGOING else ""),
                  ("projects.html","All projects"),"projects",thumb,prev,nxt)
 
 # ---- Notch
