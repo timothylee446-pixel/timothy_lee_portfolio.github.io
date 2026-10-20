@@ -28,7 +28,7 @@ PROJECTS = [
 
 # (slug, company, role, summary, tags, thumbnail)
 EXPERIENCE = [
- ("notch","Notch","Co-op","Replaced brittle radomes, automated a paint process, and built a ventilated fume enclosure.",["Composites","CNC","G-code","Fusion 360"],"notch-logo.jpg"),
+ ("notch","Notch","Mechanical engineering co-op","Replaced brittle radomes, automated a paint process, and built a ventilated fume enclosure.",["Composites","CNC","G-code","Fusion 360"],"notch-logo.jpg"),
  ("sharkninja","SharkNinja","Mechanical engineering co-op","A patented airflow component headed for 500,000 units, Tesla-valve nozzle research, and test development.",["DFM","Fluids","Testing","Patent"],"sharkninja-logo.jpg"),
 ]
 
@@ -367,7 +367,7 @@ for i,(slug,title,summ,tags,thumb) in enumerate(PROJECTS):
                  ("projects.html","All projects"),"projects",thumb,prev,nxt)
 
 # ---- Notch
-notch_meta=[("Role","Co-op"),("Tools","SolidWorks, Fusion 360, CNC machining, G-code, 3D printing"),("Focus","Radomes, automated painting, fume enclosure")]
+notch_meta=[("Role","Mechanical engineering co-op"),("Tools","SolidWorks, Fusion 360, CNC machining, G-code, 3D printing"),("Focus","Radomes, automated painting, fume enclosure")]
 notch_blocks=[
  ("p","Three projects from my co-op at Notch."),
  ("h2","Glass-fiber-reinforced polyurethane radomes"),
@@ -488,7 +488,7 @@ home = f"""<section class="hero"><div class="wrap hero-in">
     <p>My first co-op was at SharkNinja, working on corded vacuums. My proudest achievement there was inventing a patented component that greatly improved the performance of a headlining Shark product.</p>
     <p>Next I want to learn as much as I can in industry, then take those skills out on my own and start a tech company.</p>
     <dl class="facts">
-      <div><dt>Clubs</dt><dd>{tags_html(["AerospaceNU","Rev"])}</dd></div>
+      <div><dt>Clubs</dt><dd>{tags_html(["NURobotics","Rev"])}</dd></div>
       <div><dt>Toolbox</dt><dd>{tags_html(["SolidWorks","Fusion 360","FEA","AutoCAD","3D printing","CNC","Laser cutting","Arduino","Python"])}</dd></div>
       <div><dt>Off the clock</dt><dd>{tags_html(["Hiking","Camping","Travel","Spikeball","Table tennis"])}</dd></div>
     </dl>
